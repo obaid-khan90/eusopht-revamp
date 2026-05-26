@@ -1,0 +1,152 @@
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowLeftIcon, ArrowRightIcon, EyeIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { posts, getPost, formatDate } from '@/sections/blog/blogData';
+
+export function generateStaticParams() {
+  return posts.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata(props: PageProps<'/blog/[slug]'>): Promise<Metadata> {
+  const { slug } = await props.params;
+  const post = getPost(slug);
+  if (!post) return { title: 'Post Not Found' };
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `https://eusopht.com/blog/${post.slug}`,
+      type: 'article',
+      images: [{ url: post.image }],
+    },
+  };
+}
+
+export default async function BlogPostPage(props: PageProps<'/blog/[slug]'>) {
+  const { slug } = await props.params;
+  const post = getPost(slug);
+  if (!post) notFound();
+
+  const related = posts.filter((p) => p.slug !== post.slug && p.category === post.category).slice(0, 3);
+  const fallbackRelated = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const recommended = related.length ? related : fallbackRelated;
+
+  return (
+    <>
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div aria-hidden className="absolute inset-0" style={{ background: 'linear-gradient(110deg, #d1fae5 0%, #ecfdf5 22%, #f0f9ff 55%, #dbeafe 100%)' }} />
+        <div className="relative mx-auto max-w-3xl px-6 pt-32 pb-12">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-accent transition-colors"
+          >
+            <ArrowLeftIcon className="h-4 w-4" />
+            Back to Blog
+          </Link>
+
+          <div className="mt-8">
+            <span className="rounded-full bg-accent-light px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
+              {post.category}
+            </span>
+          </div>
+          <h1
+            className="mt-5 text-3xl font-extrabold leading-tight tracking-tight text-text-primary sm:text-4xl lg:text-5xl"
+            style={{ fontFamily: 'var(--font-display)' }}
+          >
+            {post.title}
+          </h1>
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-text-muted">
+            <span>{formatDate(post.date)}</span>
+            <span className="inline-flex items-center gap-1"><ClockIcon className="h-4 w-4" />{post.readTime}</span>
+            <span className="inline-flex items-center gap-1"><EyeIcon className="h-4 w-4" />{post.views} views</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Cover image */}
+      <div className="mx-auto max-w-4xl px-6 -mt-2">
+        <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-border shadow-sm">
+          <Image src={post.image} alt={post.title} fill sizes="(max-width:1024px) 100vw, 60vw" className="object-cover" priority />
+        </div>
+      </div>
+
+      {/* Body */}
+      <article className="mx-auto max-w-3xl px-6 py-16">
+        <div className="space-y-6">
+          {post.body.map((para, i) => (
+            <p key={i} className="text-lg leading-relaxed text-text-secondary">
+              {para}
+            </p>
+          ))}
+        </div>
+
+        {/* Tags */}
+        <div className="mt-10 flex flex-wrap gap-2 border-t border-border pt-8">
+          {post.tags.map((t) => (
+            <span key={t} className="rounded-full bg-accent-light px-3 py-1 text-xs font-medium text-accent">
+              #{t}
+            </span>
+          ))}
+        </div>
+      </article>
+
+      {/* Related posts */}
+      <section className="py-16 bg-white">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="mb-8 text-2xl font-bold text-text-primary" style={{ fontFamily: 'var(--font-display)' }}>
+            More from the blog
+          </h2>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            {recommended.map((p) => (
+              <Link
+                key={p.slug}
+                href={`/blog/${p.slug}`}
+                className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/8 hover:border-accent/30"
+              >
+                <div className="relative h-40 overflow-hidden">
+                  <Image src={p.image} alt={p.title} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <span className="text-xs text-text-muted">{formatDate(p.date)}</span>
+                  <h3 className="mt-1.5 font-bold text-text-primary leading-snug line-clamp-2">{p.title}</h3>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-all group-hover:gap-3">
+                    Read more
+                    <ArrowRightIcon className="h-4 w-4" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="relative overflow-hidden rounded-3xl bg-accent px-8 py-16 text-center text-white sm:px-16">
+            <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+            <div aria-hidden className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+            <div className="relative">
+              <h2 className="text-3xl font-extrabold leading-tight sm:text-4xl mb-4" style={{ fontFamily: 'var(--font-display)' }}>
+                Have a project in mind?
+              </h2>
+              <p className="mx-auto max-w-xl text-lg text-white/80 mb-8">
+                Let&apos;s turn these ideas into something real for your business.
+              </p>
+              <a href="/#contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-lg font-semibold text-accent hover:bg-white/90 transition-colors shadow-sm">
+                Start a Project
+                <ArrowRightIcon className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

@@ -1,0 +1,168 @@
+# Eusopht Website Revamp — Implementation Plan
+
+## Overview
+
+A full-site revamp of the Eusopht company website using **Next.js 16** (App Router) + **Tailwind CSS v4**.
+The goal is a **premium, light-mode, software-agency site** that avoids the "vibe-coded" sameness problem by establishing a deliberate, distinctive design system **before** writing a single component.
+
+**Reference inspiration**: [plavno.io](https://plavno.io) — specifically its floating navbar, generous whitespace, typographic hierarchy, color use, and structural clarity.
+
+---
+
+## Design System Decisions (settled)
+
+### Color Palette
+| Token | Value | Usage |
+|---|---|---|
+| `--color-bg` | `#F8FAFB` | Page background (off-white, not pure white) |
+| `--color-surface` | `#FFFFFF` | Cards, navbar, elevated surfaces |
+| `--color-border` | `#E2E8F0` | Dividers, card borders |
+| `--color-text-primary` | `#0F172A` | Headlines, dark body copy |
+| `--color-text-secondary` | `#475569` | Subtitles, supporting copy |
+| `--color-text-muted` | `#94A3B8` | Labels, captions, overlines |
+| `--color-accent` | `#2563EB` | Electric blue — CTAs, links, highlights |
+| `--color-accent-light` | `#EFF6FF` | Accent backgrounds, chip fills |
+| `--color-accent-dark` | `#1D4ED8` | Hover states on accent |
+| `--color-footer-bg` | `#F1F5F9` | Mid-tone light gray footer |
+
+> [!NOTE]
+> The accent blue (`#2563EB`) is deliberately a specific cobalt/electric blue — **not** the generic mid-blue of shadcn defaults. It's paired against off-white and navy text to feel polished rather than generic.
+
+### Typography
+| Role | Font | Weight | Size range |
+|---|---|---|---|
+| Display / Hero headlines | **Bricolage Grotesque** | 700–800 | 56px–80px |
+| All other text | **Plus Jakarta Sans** | 400–700 | 14px–36px |
+| Code / monospace | `ui-monospace, SFMono-Regular` | — | — |
+
+**Typographic scale** (CSS custom properties):
+- `--text-xs`: 12px / overlines, labels
+- `--text-sm`: 14px / captions, meta
+- `--text-base`: 16px / body copy
+- `--text-lg`: 18px / lead paragraphs
+- `--text-xl`: 20px / card titles
+- `--text-2xl`: 24px → `--text-5xl`: 48px / section headings
+- `--text-display`: 64px–80px / hero only (Bricolage Grotesque)
+
+### Motion (Framer Motion)
+- **Scroll-triggered fade-ins**: opacity 0→1, y: 24px→0, `duration: 0.5`, `ease: easeOut`
+- **Hover lifts**: cards `translateY(-4px)`, `boxShadow` intensify
+- **Stagger children**: service cards, stat counters stagger by `0.1s`
+- **Page transitions**: simple fade via `AnimatePresence`
+- **No**: particles, canvas animations, morphing shapes, parallax
+
+### Icons
+**Heroicons** (via `@heroicons/react`) — outline variant primary, solid for active/filled states.
+
+---
+
+## Site Architecture
+
+### Pages & Routes
+
+| Route | Page | Priority |
+|---|---|---|
+| `/` | **Home** | Phase 1 |
+| `/services` | Services overview | Phase 2 |
+| `/services/[slug]` | Individual service pages | Phase 2 |
+| `/work` | Portfolio / Work | Phase 3 |
+| `/about` | About Us | Phase 3 |
+| `/contact` | Contact (`mailto:` CTA only) | Phase 3 |
+
+**No blog for this revamp.** Individual service slugs to include: `web-development`, `mobile-development`, `ai-automation`, `third-party-integrations`, `outsourcing`, `product-development`, `shopify`, `hubspot`, `zapier`, `ghl`, `stripe`, `playwright`.
+
+### Navigation (Floating Pill Navbar)
+- Fixed, `position: fixed`, `top: 20px`, `left/right: 24px` (Plavno-style)
+- `border-radius: 24px`, white background, subtle box shadow
+- Logo left | Nav links center | CTA button right
+- Dropdown megamenu for "Services" on hover
+- Mobile: hamburger with full-screen slide-down drawer
+
+---
+
+## Component Architecture
+
+### Shared / Layout
+- `components/layout/Navbar.tsx` — Floating pill navbar with megamenu
+- `components/layout/Footer.tsx` — Light gray footer with 4-column grid
+- `components/layout/PageWrapper.tsx` — Framer Motion page transition wrapper
+
+### UI Primitives (design system atoms)
+- `components/ui/Button.tsx` — Primary, secondary, ghost variants
+- `components/ui/Badge.tsx` — Overline labels / category tags
+- `components/ui/Card.tsx` — Base card with hover lift animation
+- `components/ui/SectionHeader.tsx` — Overline + headline + subtitle combo
+- `components/ui/AnimatedSection.tsx` — Scroll-triggered fade-in wrapper
+
+### Home Page Sections (in order)
+1. `sections/home/HeroSection.tsx` — Headline, subtext, CTAs, stats bar, logo strip
+2. `sections/home/ServicesGrid.tsx` — Card grid of key service offerings
+3. `sections/home/WhyEusopht.tsx` — Differentiators / value propositions
+4. `sections/home/ProcessSection.tsx` — How we work (numbered steps or timeline)
+5. `sections/home/PortfolioPreview.tsx` — 3–4 featured work cards
+6. `sections/home/Testimonials.tsx` — Client testimonials carousel
+7. `sections/home/StatsSection.tsx` — Animated counters (projects, clients, years)
+8. `sections/home/CTABanner.tsx` — Full-width CTA section before footer
+
+---
+
+## Package Dependencies to Install
+
+```
+framer-motion
+@heroicons/react
+next-themes (optional, for dark mode prep)
+```
+
+Fonts via **Google Fonts** (Next.js `next/font/google`):
+- `Bricolage_Grotesque` — display
+- `Plus_Jakarta_Sans` — body
+
+---
+
+## Build Sequence
+
+### Phase 1 — Design System + Home Page
+1. `globals.css` — CSS custom properties, typography scale, reset
+2. `app/layout.tsx` — Font loading, metadata, layout shell
+3. UI primitives: Button, Badge, Card, SectionHeader, AnimatedSection
+4. Navbar + Footer
+5. All 8 Home page sections
+6. Polish: responsive, accessibility, SEO meta
+
+### Phase 2 — Services pages
+7. Services overview page
+8. Dynamic `[slug]` service page template
+9. Content data file per service
+
+### Phase 3 — Remaining pages
+10. Portfolio / Work page
+11. About page
+12. Contact page
+
+---
+
+## Open Questions
+
+> [!IMPORTANT]
+> **Logo**: You said you'll provide the logo SVG/PNG. Please drop it before we start Phase 1 so I can use it in the navbar and footer from the beginning. In the meantime I'll use a text wordmark placeholder.
+
+> [!NOTE]
+> **Company content**: For the Home page I'll use realistic placeholder content based on your old site (services, stats, taglines). If you want exact copy, provide it and I'll swap it in. Stats I'll use as placeholders: `50+ Projects`, `30+ Clients`, `5+ Years`, `10+ Countries`.
+
+> [!NOTE]
+> **Portfolio items**: For the portfolio preview I'll use placeholder cards. Do you have real project names/screenshots you want showcased, or should I use illustrative placeholders?
+
+---
+
+## Verification Plan
+
+### Automated
+- `npm run build` — ensure no TypeScript or Next.js build errors
+- `npm run lint` — ESLint clean
+
+### Manual
+- Visual review at 1440px, 1280px, 768px, 375px breakpoints
+- Hover interactions on navbar, cards, buttons
+- Scroll-triggered animations fire correctly
+- `mailto:` links work in Contact section
