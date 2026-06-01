@@ -31,7 +31,7 @@ export default function Showroom({ projects }: { projects: Project[] }) {
             Explore the showroom
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
-            Hover a project to preview it live. Each one shipped to production for a real client.
+            A quick look at the latest full-scale web applications, custom platforms, and high-performance websites.
           </p>
         </AnimatedSection>
 
@@ -40,34 +40,52 @@ export default function Showroom({ projects }: { projects: Project[] }) {
           <ul className="flex flex-col">
             {projects.map((proj, i) => {
               const isActive = i === active;
+              const projLink = proj.platforms
+                .map((plat) => proj.platformLinks?.[plat])
+                .find((link) => link && !link.toLowerCase().includes('coming soon'));
               return (
-                <li key={proj.slug}>
+                <li
+                  key={proj.slug}
+                  className="group flex items-center justify-between gap-4 border-b border-border"
+                >
                   <button
                     type="button"
                     onMouseEnter={() => setActive(i)}
                     onFocus={() => setActive(i)}
                     onClick={() => setActive(i)}
-                    className="group flex w-full items-center justify-between gap-4 border-b border-border py-5 text-left transition-colors"
+                    className="flex flex-1 items-baseline gap-4 py-5 text-left"
                   >
-                    <span className="flex items-baseline gap-4">
-                      <span
-                        className={`text-xs font-mono tabular-nums transition-colors ${isActive ? 'text-accent' : 'text-text-muted'
-                          }`}
-                      >
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <span
-                        className={`text-xl font-semibold transition-all duration-300 sm:text-2xl ${isActive ? 'text-text-primary translate-x-1' : 'text-text-muted group-hover:text-text-secondary'
-                          }`}
-                      >
-                        {proj.title}
-                      </span>
+                    <span
+                      className={`text-xs font-mono tabular-nums transition-colors ${isActive ? 'text-accent' : 'text-text-muted'
+                        }`}
+                    >
+                      {String(i + 1).padStart(2, '0')}
                     </span>
+                    <span
+                      className={`text-xl font-semibold transition-all duration-300 sm:text-2xl ${isActive ? 'text-text-primary translate-x-1' : 'text-text-muted group-hover:text-text-secondary'
+                        }`}
+                    >
+                      {proj.title}
+                    </span>
+                  </button>
+
+                  {projLink ? (
+                    <a
+                      href={projLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Visit ${proj.title} live site`}
+                      className={`shrink-0 p-2 transition-all duration-300 ${isActive ? 'text-accent opacity-100' : 'text-text-muted opacity-0 group-hover:opacity-60'
+                        } hover:text-accent! hover:opacity-100!`}
+                    >
+                      <ArrowUpRightIcon className="h-5 w-5" />
+                    </a>
+                  ) : (
                     <ArrowUpRightIcon
                       className={`h-5 w-5 shrink-0 transition-all duration-300 ${isActive ? 'text-accent opacity-100' : 'text-text-muted opacity-0 group-hover:opacity-60'
                         }`}
                     />
-                  </button>
+                  )}
                 </li>
               );
             })}
