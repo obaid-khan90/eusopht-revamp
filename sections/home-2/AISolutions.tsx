@@ -19,32 +19,32 @@ const tiles = [
     title: 'Your tools, finally talking to each other',
     body: 'Connect your CRM, helpdesk, ERP, and ops tools into a single automated flow. No more copy-pasting between systems — AI handles the handoffs.',
     Mock: NodeDiagramMock,
-    className: 'lg:col-span-7',
-    layout: 'split' as const,
+    className: 'lg:col-span-6',
+    scale: 0.6,
   },
   {
     icon: SparklesIcon,
     title: 'The intelligence layer your product is missing',
     body: 'We embed GPT, Claude, and open models directly into your product — search, generation, summarisation, Q&A — tuned to your data and brand voice.',
     Mock: PromptMock,
-    className: 'lg:col-span-5',
-    layout: 'stacked' as const,
+    className: 'lg:col-span-6',
+    scale: 0.82,
   },
   {
     icon: MicrophoneIcon,
     title: 'Let your users speak, tap, or show',
     body: 'Voice assistants, image understanding, and multimodal flows that meet users where they are — on any device, in any format.',
     Mock: VoiceMock,
-    className: 'lg:col-span-5',
-    layout: 'stacked' as const,
+    className: 'lg:col-span-6',
+    scale: 0.82,
   },
   {
     icon: CommandLineIcon,
     title: 'A purpose-built AI product, not a plugged-in API',
     body: 'When off-the-shelf AI isn\'t enough, we build it from the ground up — scalable, secure, and owned entirely by you.',
     Mock: ChatMock,
-    className: 'lg:col-span-7',
-    layout: 'split' as const,
+    className: 'lg:col-span-6',
+    scale: 0.58,
   },
 ];
 
@@ -62,49 +62,32 @@ export default function AISolutions() {
         </AnimatedSection>
 
         {/* Bento grid */}
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           {tiles.map((t, i) => (
             <AnimatedSection
               key={t.title}
               delay={(i % 2) * 0.08}
-              className={t.className}
+              className={`${t.className} h-full`}
             >
               <div className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg hover:shadow-black/8">
-                {t.layout === 'split' ? (
-                  <div className="grid h-full grid-cols-1 sm:grid-cols-2">
-                    {/* Copy */}
-                    <div className="flex flex-col p-7">
-                      <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-light">
-                        <t.icon className="h-6 w-6 text-accent" />
-                      </div>
-                      <h3 className="mb-2 text-lg font-bold leading-snug text-text-primary">
-                        {t.title}
-                      </h3>
-                      <p className="text-sm leading-relaxed text-text-secondary">{t.body}</p>
-                    </div>
-                    {/* Mock */}
-                    <div className="relative min-h-[220px] border-t border-border bg-bg sm:border-l sm:border-t-0">
+                {/* Mock — smaller, fixed height, clipped to the box */}
+                <div className="relative h-[180px] shrink-0 overflow-hidden border-b border-border bg-bg">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-full origin-center" style={{ transform: `scale(${t.scale})` }}>
                       <t.Mock />
                     </div>
                   </div>
-                ) : (
-                  <div className="flex h-full flex-col">
-                    {/* Mock */}
-                    <div className="relative min-h-[200px] flex-1 border-b border-border bg-bg">
-                      <t.Mock />
-                    </div>
-                    {/* Copy */}
-                    <div className="p-7">
-                      <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-light">
-                        <t.icon className="h-6 w-6 text-accent" />
-                      </div>
-                      <h3 className="mb-2 text-lg font-bold leading-snug text-text-primary">
-                        {t.title}
-                      </h3>
-                      <p className="text-sm leading-relaxed text-text-secondary">{t.body}</p>
-                    </div>
+                </div>
+                {/* Copy */}
+                <div className="flex flex-1 flex-col p-8">
+                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-light">
+                    <t.icon className="h-7 w-7 text-accent" />
                   </div>
-                )}
+                  <h3 className="mb-3 text-2xl font-bold leading-tight text-text-primary">
+                    {t.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-text-secondary lg:text-base">{t.body}</p>
+                </div>
               </div>
             </AnimatedSection>
           ))}

@@ -2,7 +2,7 @@ import HeroSection from '@/sections/home/HeroSection';
 import ServicesGrid from '@/sections/home-3/ServicesGrid';
 import AISolutions from '@/sections/home-2/AISolutions';
 import ProcessSection from '@/sections/home/ProcessSection';
-import PortfolioPreview from '@/sections/home/PortfolioPreview';
+import PortfolioPreview from '@/sections/home-2/PortfolioPreviewRows';
 import Testimonials from '@/sections/home/Testimonials';
 import StatsSection from '@/sections/home/StatsSection';
 import FAQ from '@/sections/home/FAQ';

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import PortfolioHero from '@/sections/portfolio/PortfolioHero';
-import FeaturedShowcase from '@/sections/portfolio/FeaturedShowcase';
+import FeaturedCarousels from '@/sections/portfolio/FeaturedCarousels';
 import PortfolioGrid from '@/sections/portfolio/PortfolioGrid';
 import IndustriesStrip from '@/sections/portfolio/IndustriesStrip';
 import CTABanner from '@/sections/home/CTABanner';
@@ -33,7 +33,7 @@ export default function PortfolioPage() {
   return (
     <>
       <PortfolioHero />
-      <FeaturedShowcase projects={featured} />
+      <FeaturedCarousels projects={featured} />
       <PortfolioGrid items={rest} />
       <IndustriesStrip />
       <CTABanner />

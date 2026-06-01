@@ -10,7 +10,7 @@ export function NodeDiagramMock() {
     { label: 'Machine Learning\n(ML)', icon: NetworkIcon },
   ];
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-9 p-8">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-8">
       {/* Hub — chip/GPU core */}
       <div className="flex flex-col items-center gap-2.5">
         <div
@@ -30,12 +30,12 @@ export function NodeDiagramMock() {
       </div>
 
       {/* Connector lines */}
-      <div className="relative h-7 w-4/5">
-        <div className="absolute left-1/2 top-0 h-7 w-px bg-border" />
-        <div className="absolute left-[16%] right-[16%] top-7 h-px bg-border" />
-        <div className="absolute left-[16%] top-7 h-3.5 w-px bg-border" />
-        <div className="absolute left-1/2 top-7 h-3.5 w-px bg-border" />
-        <div className="absolute right-[16%] top-7 h-3.5 w-px bg-border" />
+      <div className="relative h-4 w-4/5">
+        <div className="absolute left-1/2 top-0 h-4 w-px bg-border" />
+        <div className="absolute left-[16%] right-[16%] top-4 h-px bg-border" />
+        <div className="absolute left-[16%] top-4 h-2.5 w-px bg-border" />
+        <div className="absolute left-1/2 top-4 h-2.5 w-px bg-border" />
+        <div className="absolute right-[16%] top-4 h-2.5 w-px bg-border" />
       </div>
 
       {/* Leaf nodes */}
