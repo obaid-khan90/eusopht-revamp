@@ -62,9 +62,9 @@ function OverviewCard({ p, dark }: { p: Project; dark: boolean }) {
 }
 
 function FeaturesCard({ p, dark }: { p: Project; dark: boolean }) {
-  const card    = dark ? 'border-white/10 bg-white/5' : 'border-border bg-white';
-  const item    = dark ? 'text-white/65' : 'text-text-secondary';
-  const tag     = dark ? 'border-white/15 bg-white/5 text-white/55' : 'border-border bg-bg text-text-muted';
+  const card = dark ? 'border-white/10 bg-white/5' : 'border-border bg-white';
+  const item = dark ? 'text-white/65' : 'text-text-secondary';
+  const tag = dark ? 'border-white/15 bg-white/5 text-white/55' : 'border-border bg-bg text-text-muted';
   const divider = dark ? 'border-white/10' : 'border-border';
   return (
     <div className={`flex h-full w-full flex-col overflow-hidden rounded-2xl border shadow-sm ${card}`}>

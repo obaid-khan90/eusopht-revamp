@@ -1,6 +1,6 @@
 import HeroSection from '@/sections/home/HeroSection';
 import ServicesGrid from '@/sections/home-3/ServicesGrid';
-import AISolutions from '@/sections/home-2/AISolutions';
+import AISolutions from '@/sections/home/AISolutionsSteps';
 import ProcessSection from '@/sections/home/ProcessSection';
 import PortfolioPreview from '@/sections/home/PortfolioPreview';
 import Testimonials from '@/sections/home/Testimonials';

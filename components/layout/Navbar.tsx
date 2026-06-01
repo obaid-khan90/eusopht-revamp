@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ChevronDownIcon, Bars3Icon, XMarkIcon,
+  ChevronDownIcon, Bars3Icon, XMarkIcon, ArrowRightIcon,
   SparklesIcon, BoltIcon, UserGroupIcon, CodeBracketSquareIcon,
 } from '@heroicons/react/24/outline';
 
@@ -178,10 +178,15 @@ export default function Navbar() {
                           <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-light text-accent transition-colors group-hover:bg-accent group-hover:text-white">
                             <Icon className="h-5 w-5" />
                           </div>
-                          <div className="min-w-0">
-                            <p className="text-sm font-bold text-text-primary group-hover:text-accent transition-colors">
-                              {col.category}
-                            </p>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center justify-between gap-2">
+                              <p className="text-sm font-bold text-text-primary group-hover:text-accent transition-colors">
+                                {col.category}
+                              </p>
+                              <span className="inline-flex items-center gap-1 text-xs font-semibold text-accent opacity-0 transition-all duration-200 group-hover:opacity-100 whitespace-nowrap">
+                                Explore <ArrowRightIcon className="h-3 w-3" />
+                              </span>
+                            </div>
                             <p className="mt-1 text-xs leading-relaxed text-text-secondary line-clamp-2">
                               {col.description}
                             </p>
