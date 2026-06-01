@@ -23,7 +23,7 @@ const pillars = [
     title: 'Staff Augmentation',
     description:
       'Embed experienced Eusopht engineers directly into your team — on your stack, at your pace, with zero ramp-up friction.',
-    icon: '/icons-cut/staff.png',
+    icon: '/staff.png',
     href: '/services/staff-augmentation',
   },
   {
@@ -61,14 +61,14 @@ export default function ServicesGrid() {
                 {/* Back layer — 3D icon bleeding from bottom-right */}
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute -bottom-10 -right-10 z-0 h-52 w-52 opacity-40 transition-all duration-300 group-hover:scale-105 group-hover:opacity-60"
+                  className="pointer-events-none absolute -bottom-10 -right-10 z-0 h-52 w-52 mix-blend-multiply opacity-40 transition-all duration-300 group-hover:scale-105 group-hover:opacity-60"
                 >
                   <Image
                     src={p.icon}
                     alt=""
                     fill
                     sizes="208px"
-                    className="object-contain"
+                    className="object-contain brightness-110 saturate-[0.85]"
                   />
                 </div>
 

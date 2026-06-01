@@ -53,14 +53,14 @@ export default function StaffHero() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative hidden aspect-square w-[38%] shrink-0 opacity-75 lg:block"
+              className="relative hidden aspect-square w-[38%] shrink-0 mix-blend-multiply opacity-75 lg:block"
             >
               <Image
-                src="/icons-cut/staff.png"
+                src="/staff.png"
                 alt="Staff Augmentation"
                 fill
                 sizes="(max-width:1024px) 0vw, 38vw"
-                className="object-contain"
+                className="object-contain brightness-110 saturate-[0.85]"
                 priority
               />
             </motion.div>

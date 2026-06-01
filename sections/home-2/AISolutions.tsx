@@ -16,34 +16,32 @@ import {
 const tiles = [
   {
     icon: PuzzlePieceIcon,
-    title: 'AI Integrations & Business Process Automation',
-    body: 'We wire AI into your existing systems through real-time, event-driven pipelines — across message queues, workflow orchestration, and serverless architectures.',
+    title: 'Your tools, finally talking to each other',
+    body: 'Connect your CRM, helpdesk, ERP, and ops tools into a single automated flow. No more copy-pasting between systems — AI handles the handoffs.',
     Mock: NodeDiagramMock,
-    // wide tile, mock beside copy
     className: 'lg:col-span-7',
     layout: 'split' as const,
   },
   {
     icon: SparklesIcon,
-    title: 'Generative AI & LLM Integration',
-    body: 'OpenAI, Claude, and open models integrated into your workflows — with fine-tuning, prompt engineering, and RAG.',
+    title: 'The intelligence layer your product is missing',
+    body: 'We embed GPT, Claude, and open models directly into your product — search, generation, summarisation, Q&A — tuned to your data and brand voice.',
     Mock: PromptMock,
-    // tall-ish tile, mock on top
     className: 'lg:col-span-5',
     layout: 'stacked' as const,
   },
   {
     icon: MicrophoneIcon,
-    title: 'Voice & Multimodal Interfaces',
-    body: 'Natural voice and multimodal experiences using speech recognition, text-to-speech, and computer vision.',
+    title: 'Let your users speak, tap, or show',
+    body: 'Voice assistants, image understanding, and multimodal flows that meet users where they are — on any device, in any format.',
     Mock: VoiceMock,
     className: 'lg:col-span-5',
     layout: 'stacked' as const,
   },
   {
     icon: CommandLineIcon,
-    title: 'Custom AI Application & Service Development',
-    body: 'Scalable, secure AI-driven applications tailored to your business — containerised, Python (FastAPI), PyTorch, Node, React, and cloud-native.',
+    title: 'A purpose-built AI product, not a plugged-in API',
+    body: 'When off-the-shelf AI isn\'t enough, we build it from the ground up — scalable, secure, and owned entirely by you.',
     Mock: ChatMock,
     className: 'lg:col-span-7',
     layout: 'split' as const,
@@ -57,8 +55,8 @@ export default function AISolutions() {
         <AnimatedSection className="flex flex-col items-center text-center mb-16">
           <SectionHeader
             overline="AI Solutions"
-            headline="Comprehensive AI Solutions that Accelerate Your Business"
-            subtitle="From intelligent automation to generative AI and voice — we build the AI capabilities that move your business forward."
+            headline="AI that works the way your business does"
+            subtitle="Not generic AI tools — capabilities designed around your workflows, your data, and your customers."
             centered
           />
         </AnimatedSection>

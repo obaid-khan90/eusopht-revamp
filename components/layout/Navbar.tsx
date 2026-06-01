@@ -5,50 +5,40 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDownIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import {
+  ChevronDownIcon, Bars3Icon, XMarkIcon,
+  SparklesIcon, BoltIcon, UserGroupIcon, CodeBracketSquareIcon,
+} from '@heroicons/react/24/outline';
 
 // 4 service pillars — AI is primary. Capabilities grouped under each.
 const megaMenu = [
   {
     category: 'AI Development',
     href: '/services/ai',
-    primary: true,
-    links: [
-      { label: 'AI Agent Development', href: '/services/ai' },
-      { label: 'AI Chatbots & Assistants', href: '/services/ai' },
-      { label: 'Computer Vision', href: '/services/ai' },
-      { label: 'ML / LLM Development', href: '/services/ai' },
-    ],
+    icon: SparklesIcon,
+    description: 'AI agents, chatbots, computer vision, and custom LLM solutions that automate decisions.',
+    links: ['AI Agent Development', 'AI Chatbots & Assistants', 'Computer Vision', 'ML / LLM Development'],
   },
   {
     category: 'Automation',
     href: '/services/automation',
-    links: [
-      { label: 'Workflow Automation', href: '/services/automation' },
-      { label: 'Third-Party Integrations', href: '/services/automation' },
-      { label: 'Zapier · Make · n8n', href: '/services/automation' },
-      { label: 'CRM Automation (HubSpot, GHL)', href: '/services/automation' },
-    ],
+    icon: BoltIcon,
+    description: 'Workflow automation and deep integrations that connect your tools and eliminate manual work.',
+    links: ['Workflow Automation', 'Third-Party Integrations', 'Zapier · Make · n8n', 'CRM Automation'],
   },
   {
     category: 'Staff Augmentation',
     href: '/services/staff-augmentation',
-    links: [
-      { label: 'Dedicated Teams', href: '/services/staff-augmentation' },
-      { label: 'Outsourcing', href: '/services/staff-augmentation' },
-      { label: 'QA & Playwright Testing', href: '/services/staff-augmentation' },
-      { label: 'Hire Developers', href: '/services/staff-augmentation' },
-    ],
+    icon: UserGroupIcon,
+    description: 'Embed experienced engineers directly into your team — on your stack, at your pace.',
+    links: ['Dedicated Teams', 'Outsourcing', 'QA & Playwright Testing', 'Hire Developers'],
   },
   {
     category: 'Custom Software',
     href: '/services/custom-software',
-    links: [
-      { label: 'Web Development', href: '/services/custom-software' },
-      { label: 'Mobile Development', href: '/services/custom-software' },
-      { label: 'Product / MVP Development', href: '/services/custom-software' },
-      { label: 'Cloud & SaaS', href: '/services/custom-software' },
-    ],
+    icon: CodeBracketSquareIcon,
+    description: 'End-to-end product engineering — web, mobile, and cloud apps built to scale.',
+    links: ['Web Development', 'Mobile Development', 'Product / MVP Development', 'Cloud & SaaS'],
   },
 ];
 
@@ -175,35 +165,37 @@ export default function Navbar() {
                 onMouseEnter={() => setMegaOpen(true)}
                 className="absolute left-0 right-0 top-full mt-3 hidden md:block"
               >
-                <div className="mx-auto max-w-4xl rounded-2xl border border-border bg-white shadow-2xl shadow-black/10 p-3">
-                  <div className="grid grid-cols-4 gap-3">
-                    {megaMenu.map((col) => (
-                      <Link
-                        key={col.category}
-                        href={col.href}
-                        className="group flex flex-col rounded-xl border border-transparent bg-bg p-5 transition-all hover:border-accent/30 hover:bg-accent-light hover:shadow-sm"
-                      >
-                        <span
-                          className={`mb-3 text-sm font-bold ${col.primary ? 'text-accent' : 'text-text-primary group-hover:text-accent'
-                            }`}
+                <div className="rounded-2xl border border-border bg-white shadow-2xl shadow-black/10 p-5">
+                  <div className="grid grid-cols-2 gap-2">
+                    {megaMenu.map((col) => {
+                      const Icon = col.icon;
+                      return (
+                        <Link
+                          key={col.category}
+                          href={col.href}
+                          className="group flex items-start gap-4 rounded-xl border border-transparent p-4 transition-all hover:border-border hover:bg-bg"
                         >
-                          {col.category}
-                        </span>
-                        <ul className="space-y-2">
-                          {col.links.map((l) => (
-                            <li
-                              key={l.label}
-                              className="text-[13px] font-medium text-text-secondary group-hover:text-text-primary transition-colors"
-                            >
-                              {l.label}
-                            </li>
-                          ))}
-                        </ul>
-                        <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-accent opacity-0 transition-opacity group-hover:opacity-100">
-                          Explore →
-                        </span>
-                      </Link>
-                    ))}
+                          <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-light text-accent transition-colors group-hover:bg-accent group-hover:text-white">
+                            <Icon className="h-5 w-5" />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-sm font-bold text-text-primary group-hover:text-accent transition-colors">
+                              {col.category}
+                            </p>
+                            <p className="mt-1 text-xs leading-relaxed text-text-secondary line-clamp-2">
+                              {col.description}
+                            </p>
+                            <ul className="mt-2.5 space-y-1">
+                              {col.links.map((l) => (
+                                <li key={l} className="text-[12px] font-medium text-text-muted transition-colors group-hover:text-text-secondary">
+                                  {l}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               </motion.div>

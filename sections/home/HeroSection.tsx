@@ -132,15 +132,15 @@ export default function HeroSection() {
             href="https://www.trustpilot.com/review/eusopht.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-7 inline-flex flex-col items-center gap-1.5"
+            className="group mt-7 inline-flex flex-col items-center gap-2"
           >
             {/* Top row — Excellent + star tiles */}
-            <span className="flex items-center gap-2">
-              <span className="text-sm font-bold text-text-primary">Excellent</span>
-              <span className="flex items-center gap-0.5">
+            <span className="flex items-center gap-2.5">
+              <span className="text-base font-bold text-text-primary">Excellent</span>
+              <span className="flex items-center gap-1">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <span key={i} className="flex h-5 w-5 items-center justify-center bg-[#00B67A]">
-                    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-white" aria-hidden>
+                  <span key={i} className="flex h-6 w-6 items-center justify-center bg-[#00B67A]">
+                    <svg viewBox="0 0 24 24" className="h-4 w-4 fill-white" aria-hidden>
                       <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.401 8.166L12 18.896l-7.335 3.865 1.401-8.166L.132 9.211l8.2-1.193z" />
                     </svg>
                   </span>
@@ -148,9 +148,9 @@ export default function HeroSection() {
               </span>
             </span>
             {/* Bottom row — See all reviews on Trustpilot */}
-            <span className="flex items-center gap-1 text-xs text-text-secondary">
+            <span className="flex items-center gap-1.5 text-sm text-text-secondary">
               See all reviews on
-              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-[#00B67A]" aria-hidden>
+              <svg viewBox="0 0 24 24" className="h-4 w-4 fill-[#00B67A]" aria-hidden>
                 <path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.784 1.401 8.166L12 18.896l-7.335 3.865 1.401-8.166L.132 9.211l8.2-1.193z" />
               </svg>
               <span className="font-semibold text-text-primary group-hover:underline">Trustpilot</span>

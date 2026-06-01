@@ -1,7 +1,12 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import {
+  HeartIcon,
+  CurrencyDollarIcon,
+  ShoppingBagIcon,
+  AcademicCapIcon,
+} from '@heroicons/react/24/outline';
 
 /* Pointer-arrow tip */
 function CursorArrow({ color = '#334155', flip = false, rotate = 0 }: { color?: string; flip?: boolean; rotate?: number }) {
@@ -11,7 +16,7 @@ function CursorArrow({ color = '#334155', flip = false, rotate = 0 }: { color?: 
   return (
     <svg
       viewBox="0 0 24 24"
-      className="h-9 w-9 drop-shadow-sm"
+      className="h-9 w-9 drop-shadow-sm opacity-80"
       style={{ transform: transform || undefined }}
       fill={color}
       aria-hidden
@@ -21,17 +26,17 @@ function CursorArrow({ color = '#334155', flip = false, rotate = 0 }: { color?: 
   );
 }
 
-/* Person cursor: arrow + a pill containing avatar + name label.
-   point='left'  → arrow on the left of the pill, pointing left
-   point='right' → arrow on the right of the pill, pointing right */
-function PersonCursor({
-  src,
+/* Industry cursor: arrow + a pill containing icon + industry name */
+function IndustryCursor({
+  icon: Icon,
   name,
+  color,
   point = 'left',
   rotate = 0,
 }: {
-  src: string;
+  icon: React.ComponentType<{ className?: string }>;
   name: string;
+  color: string;
   point?: 'left' | 'right';
   rotate?: number;
 }) {
@@ -40,16 +45,16 @@ function PersonCursor({
     <div className={`flex items-center gap-0.5 ${arrowLeft ? '' : 'flex-row-reverse'}`}>
       <CursorArrow flip={arrowLeft} rotate={rotate} />
       <div
-        className="flex items-center gap-2 rounded-full border border-white/70 bg-white/90 py-1 pl-1 pr-3 shadow-lg shadow-black/10 backdrop-blur-sm"
+        className="flex items-center gap-2.5 rounded-full border border-white/70 bg-white/90 p-1 pr-4 shadow-lg shadow-black/10 backdrop-blur-sm"
         style={{ boxShadow: '0 8px 20px -8px rgba(0,0,0,0.25)' }}
       >
-        <div className="relative">
-          <div className="h-8 w-8 overflow-hidden rounded-full border border-white bg-white">
-            <Image src={src} alt={name} width={32} height={32} className="h-full w-full object-cover" />
-          </div>
-          <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-500" />
+        <div
+          className="flex h-9 w-9 items-center justify-center rounded-full"
+          style={{ backgroundColor: `${color}18`, border: `1.5px solid ${color}40`, color }}
+        >
+          <Icon className="h-4.5 w-4.5" />
         </div>
-        <span className="text-xs font-semibold text-text-primary whitespace-nowrap">{name}</span>
+        <span className="text-sm font-semibold text-text-primary whitespace-nowrap">{name}</span>
       </div>
     </div>
   );
@@ -91,24 +96,32 @@ const float = (range: number, dur: number) => ({
   transition: { duration: dur, repeat: Infinity, ease: 'easeInOut' as const },
 });
 
+const INDUSTRIES = [
+  { icon: CurrencyDollarIcon, name: 'Fintech', color: '#16a34a', point: 'left' as const, rotate: 145, pos: 'right-0 top-[12%]' },
+  { icon: HeartIcon, name: 'Healthcare', color: '#dc2626', point: 'left' as const, rotate: 125, pos: 'right-2 top-[38%]' },
+  { icon: ShoppingBagIcon, name: 'eCommerce', color: '#9333ea', point: 'right' as const, rotate: 140, pos: 'left-[-8%] top-[15%]' },
+  { icon: AcademicCapIcon, name: 'EdTech', color: '#ea580c', point: 'right' as const, rotate: 110, pos: 'left-[-5%] top-[50%]' },
+];
+
 export default function FloatingCursors() {
   return (
-    // Constrained to the same max-w as hero content so cursors hug the container
     <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
       <div className="relative mx-auto h-full max-w-5xl">
-        {/* Right — client (upper) */}
-        <motion.div className="absolute right-0 top-[12%]" {...float(8, 6)}>
-          <PersonCursor src="https://randomuser.me/api/portraits/women/44.jpg" name="Sarah" point="left" rotate={165} />
-        </motion.div>
+        {INDUSTRIES.map((ind, i) => (
+          <motion.div key={ind.name} className={`absolute ${ind.pos}`} {...float(7 + i, 5.5 + i * 0.5)}>
+            <IndustryCursor
+              icon={ind.icon}
+              name={ind.name}
+              color={ind.color}
+              point={ind.point}
+              rotate={ind.rotate}
+            />
+          </motion.div>
+        ))}
 
-        {/* Right — client (just below, closer together) */}
-        <motion.div className="absolute right-2 top-[38%]" {...float(7, 5.5)}>
-          <PersonCursor src="https://randomuser.me/api/portraits/men/80.jpg" name="James" point="left" rotate={125} />
-        </motion.div>
-
-        {/* Left — AI Agent */}
-        <motion.div className="absolute left-0 top-[35%]" {...float(10, 7)}>
-          <AICursor rotate={105} />
+        {/* AI Agent */}
+        <motion.div className="absolute left-4 top-[33%]" {...float(10, 7)}>
+          <AICursor rotate={120} />
         </motion.div>
       </div>
     </div>

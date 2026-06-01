@@ -10,54 +10,103 @@ import { StarIcon } from '@heroicons/react/24/solid';
 
 interface Testimonial {
   name: string;
-  role: string;
-  text: string;
+  company: string;
+  content: string;
   rating: number;
-  image: string;
+  image?: string;
 }
 
 const testimonials: Testimonial[] = [
   {
-    name: 'Sarah Mitchell',
-    role: 'CEO, RetailEdge Inc.',
-    text: 'Eusopht rebuilt our entire storefront in 6 weeks. The new headless setup is measurably faster and our conversion rate jumped 22% in the first month.',
+    name: "Mohamed D.",
+    company: "Gulpes App",
+    content: "I highly recommend EuSopht! They were great to work with - excellent communication, attention to detail, and always met deadlines.",
     rating: 5,
-    image: 'https://randomuser.me/api/portraits/women/44.jpg',
+    image: "/Mohamed.png",
   },
   {
-    name: 'James Okafor',
-    role: 'Head of Growth, Leapfrog SaaS',
-    text: 'The HubSpot + AI lead scoring workflow they built cut our response time by 80%. We went from manually following up to a system that just runs itself.',
+    name: "Stephen S.",
+    company: "Hybrid Flutter App",
+    content: "Excellent Development Service - Well Done. It's so refreshing to work with an off-shore development team that listens to requirements, provides what is requested and in such a professional manner - Thank you.",
     rating: 5,
-    image: 'https://randomuser.me/api/portraits/men/32.jpg',
+    image: "/default-avatar.png",
   },
   {
-    name: 'Anika Sharma',
-    role: 'CTO, Fintara',
-    text: "Eusopht is the first agency that actually thinks like a business partner. They pushed back on bad ideas and saved us from expensive mistakes.",
+    name: "Nadim A.",
+    company: "SaaS WebApp",
+    content: "Great Company, great experience, very professional, and most importantly communication and follow ups are definitely exceptional! Will definitely hire EuSopht again for other projects.",
     rating: 5,
-    image: 'https://randomuser.me/api/portraits/women/68.jpg',
+    image: "/nadim.png",
   },
   {
-    name: 'David Renner',
-    role: 'Product Lead, Buildspace',
-    text: 'Our React Native app went from concept to App Store in under 10 weeks. The code quality was excellent — our team picked it up with zero ramp time.',
+    name: "Mansoor Osmani",
+    company: "CLCI",
+    content: "I have the pleasure of working with EuSopht on few projects recently. During my 30 years of experience in IT and Management Consulting I have come across very few companies who have impressed me as much as EuSopht. Their work style is both efficient and intelligent.",
     rating: 5,
-    image: 'https://randomuser.me/api/portraits/men/52.jpg',
+    image: "/mansoor-osmani.png",
   },
   {
-    name: 'Fatima Al-Rashidi',
-    role: 'Ops Director, NovaClinics',
-    text: 'They automated our patient intake and document processing with AI. What used to take 3 hours a day now happens in minutes. A game changer.',
+    name: "Andre S.",
+    company: "Meu Exotico",
+    content: "Amazing job and professionalism. Do not hesitate to hire EuSopht.",
     rating: 5,
-    image: 'https://randomuser.me/api/portraits/women/65.jpg',
+    image: "/default-avatar.png",
   },
   {
-    name: 'Carlos Mendes',
-    role: 'Founder, Orderly',
-    text: 'Eusopht integrated Stripe, ShipStation and our custom ERP in one clean API layer. No hacks, no workarounds — exactly how we needed it architected.',
+    name: "Anthony M.",
+    company: "PHP Coding",
+    content: "Very impressed with my first job with EuSopht. Quality work delivered before the deadline with excellent communications - asked all the questions they needed to ensure the job was done correctly the first time. I won't hesitate to use them again.",
     rating: 5,
-    image: 'https://randomuser.me/api/portraits/men/76.jpg',
+    image: "/default-avatar.png",
+  },
+  {
+    name: "Nina Chen",
+    company: "HubSpot - aXcelerate Integration",
+    content: "This Project was delivered successfully even when it seemed impossible. It's great to have worked with them!",
+    rating: 5,
+    image: "/aibuddy.png",
+  },
+  {
+    name: "Craig Anderson",
+    company: "Eusopht Client",
+    content: "Excellent service, very helpful, easy to deal with and prompt. Great solution. I highly recommend Eusopht for your technology needs.",
+    rating: 5,
+    image: "/default-avatar.png",
+  },
+  {
+    name: "Steen",
+    company: "Sloif Platform",
+    content: "I can only recommend Umar and his crew for their skill in software development, their ability to advise me and be critical to my thoughts when needed. I can give an overall task, leave them alone, and get a good product from it.",
+    rating: 5,
+    image: "/default-avatar.png",
+  },
+  {
+    name: "Ahmad Alkhlif",
+    company: "Digital Konsulterna",
+    content: "Working with EuSopht has been a game-changer for us. Umar and Salman felt more like partners than service providers. Their commitment to open, honest communication really made a difference - it felt like they were as invested in our success as we were.",
+    rating: 5,
+    image: "/default-avatar.png",
+  },
+  {
+    name: "Nick Haritos",
+    company: "Operations Platform",
+    content: "Owais has great expertise in integrating and building tools tailored to our unique business needs. The solutions he provided have saved us both time and money. He understands complex business issues quickly and outperforms our initial expectations every time.",
+    rating: 5,
+    image: "/default-avatar.png",
+  },
+  {
+    name: "John Jenks",
+    company: "Telecom Industry App",
+    content: "Having worked over the last 15 years with many offshore service providers, I have finally found a company that is true to their word, delivers what is agreed, at the expected quality standard and the agreed budget. Simply put, great work from a great team.",
+    rating: 5,
+    image: "/default-avatar.png",
+  },
+  {
+    name: "Nadim Bargo",
+    company: "Web Application",
+    content: "From an idea into a fully developed web app - Eusopht demonstrated a high level of professionalism and creativity. They took the time to understand my vision and translated that into a beautifully designed and fully functional web app.",
+    rating: 5,
+    image: "/default-avatar.png",
   },
 ];
 
@@ -67,29 +116,33 @@ function Stars({ rating }: { rating: number }) {
   return (
     <div className="flex gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
-        <StarIcon
-          key={i}
-          className={`h-4 w-4 ${i < rating ? 'text-amber-400' : 'text-border'}`}
-        />
+        <StarIcon key={i} className={`h-4 w-4 ${i < rating ? 'text-amber-400' : 'text-border'}`} />
       ))}
     </div>
   );
 }
 
 function Card({ t }: { t: Testimonial }) {
+  const initials = t.name.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase();
   return (
     <div className="flex h-full flex-col rounded-2xl border border-border bg-white p-7 shadow-sm">
       <Stars rating={t.rating} />
       <p className="mt-4 flex-1 text-sm leading-relaxed text-text-secondary">
-        &ldquo;{t.text}&rdquo;
+        &ldquo;{t.content}&rdquo;
       </p>
       <div className="mt-6 flex items-center gap-3">
-        <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-border">
-          <Image src={t.image} alt={t.name} fill sizes="44px" className="object-cover" />
-        </div>
+        {t.image ? (
+          <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-border">
+            <Image src={t.image} alt={t.name} fill sizes="44px" className="object-cover" />
+          </div>
+        ) : (
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-light text-sm font-bold text-accent">
+            {initials}
+          </div>
+        )}
         <div>
           <p className="text-sm font-semibold text-text-primary leading-tight">{t.name}</p>
-          <p className="text-xs text-text-muted leading-snug mt-0.5">{t.role}</p>
+          <p className="text-xs text-text-muted leading-snug mt-0.5">{t.company}</p>
         </div>
       </div>
     </div>
@@ -158,9 +211,7 @@ export default function Testimonials() {
                   setPage(i);
                 }}
                 aria-label={`Go to page ${i + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  i === page ? 'w-8 bg-accent' : 'w-2 bg-border'
-                }`}
+                className={`h-2 rounded-full transition-all duration-300 ${i === page ? 'w-8 bg-accent' : 'w-2 bg-border'}`}
               />
             ))}
           </div>
