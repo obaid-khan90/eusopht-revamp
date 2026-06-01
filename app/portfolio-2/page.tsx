@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import PortfolioHero from '@/sections/portfolio/PortfolioHero';
-import Showroom from '@/sections/portfolio/Showroom';
+import FeaturedCarousel from '@/sections/portfolio/FeaturedCarousel';
 import PortfolioGrid from '@/sections/portfolio/PortfolioGrid';
 import IndustriesStrip from '@/sections/portfolio/IndustriesStrip';
 import CTABanner from '@/sections/home/CTABanner';
@@ -26,20 +26,20 @@ export const metadata: Metadata = {
   title: 'Portfolio — Projects & Case Studies',
   description:
     'Explore Eusopht’s portfolio of web and mobile products — AI platforms, fintech wallets, eCommerce stores, and more. Real projects, real results.',
-  alternates: { canonical: '/portfolio' },
+  alternates: { canonical: '/portfolio-2' },
   openGraph: {
     title: 'Eusopht Portfolio — Projects We’re Proud Of',
     description: 'A diverse portfolio of successful products, platforms, and digital transformations.',
-    url: 'https://eusopht.com/portfolio',
+    url: 'https://eusopht.com/portfolio-2',
     type: 'website',
   },
 };
 
-export default function PortfolioPage() {
+export default function Portfolio2Page() {
   return (
     <>
       <PortfolioHero />
-      <Showroom projects={featured} />
+      <FeaturedCarousel projects={featured} />
       <PortfolioGrid items={rest} />
       <IndustriesStrip />
       <CTABanner />
