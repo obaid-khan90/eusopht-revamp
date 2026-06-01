@@ -180,13 +180,19 @@ function ProjectRow({ p, image, index }: { p: Project; image: string; index: num
               className={`pointer-events-none absolute inset-y-0 ${fadeSide}-0 w-32 transition-opacity duration-300 ${peekVisible ? 'opacity-100' : 'opacity-0'}`}
               style={{ background: `linear-gradient(to ${fadeSide}, transparent, rgba(241,245,249,0.93))` }}
             />
-            {/* Arrows overlaid on fade */}
+            {/* Arrows overlaid on fade — for reversed row, left arrow drives forward */}
             <div className={`absolute inset-y-0 ${fadeSide}-0 flex w-32 flex-col items-center justify-center gap-2`}>
-              <button onClick={goPrev} disabled={offset === 0} aria-label="Previous"
+              <button
+                onClick={reversed ? goNext : goPrev}
+                disabled={reversed ? offset === MAX : offset === 0}
+                aria-label={reversed ? 'Next' : 'Previous'}
                 className={`pointer-events-auto flex h-9 w-9 items-center justify-center rounded-full border transition-colors ${arrowCls}`}>
                 <ChevronLeftIcon className="h-4 w-4" />
               </button>
-              <button onClick={goNext} disabled={offset === MAX} aria-label="Next"
+              <button
+                onClick={reversed ? goPrev : goNext}
+                disabled={reversed ? offset === 0 : offset === MAX}
+                aria-label={reversed ? 'Previous' : 'Next'}
                 className={`pointer-events-auto flex h-9 w-9 items-center justify-center rounded-full border transition-colors ${arrowCls}`}>
                 <ChevronRightIcon className="h-4 w-4" />
               </button>
