@@ -41,6 +41,55 @@ export const TECH_META: Record<string, { icon: string; color: string }> = {
   'Swift': { icon: 'swift', color: 'F05138' },
 };
 
+/* Solution-type grouping — maps each project slug to one of the home
+   "Our Work" categories so /portfolio can mirror them with anchors. */
+export type SolutionKey = 'ai' | 'automation' | 'web-mobile';
+
+export interface SolutionGroup {
+  key: SolutionKey;
+  label: string;
+  blurb: string;
+}
+
+export const SOLUTION_GROUPS: SolutionGroup[] = [
+  { key: 'ai', label: 'AI Solutions', blurb: 'Intelligent products powered by agents, LLMs, and computer vision.' },
+  { key: 'automation', label: 'Automation & Integrations', blurb: 'Workflows and integrations that connect your stack and remove manual work.' },
+  { key: 'web-mobile', label: 'Web & Mobile Apps', blurb: 'End-to-end web and mobile products built to scale, from MVP to enterprise.' },
+];
+
+const SLUG_SOLUTION: Record<string, SolutionKey> = {
+  // AI
+  'social-media-blast': 'ai',
+  'vizii': 'ai',
+  'evalu': 'ai',
+  'guidewire-aid': 'ai',
+  'learning-cert': 'ai',
+  // Automation & integrations
+  'postmerica': 'automation',
+  'nullship': 'automation',
+  'organaise': 'automation',
+  'autosmart-australia': 'automation',
+  'autosmart-axis': 'automation',
+  'canezo': 'automation',
+  // Web & mobile (default)
+  'autoflow': 'web-mobile',
+  'cricketmood': 'web-mobile',
+  'midwifex': 'web-mobile',
+  'meu-exotico': 'web-mobile',
+  'uandi-wallet': 'web-mobile',
+  'vital-group': 'web-mobile',
+  'slym-yoga': 'web-mobile',
+  'webees': 'web-mobile',
+  'mensa-pay': 'web-mobile',
+  'job-application-portal': 'web-mobile',
+  'exhibitpro': 'web-mobile',
+  'security-world': 'web-mobile',
+};
+
+export function solutionOf(slug: string): SolutionKey {
+  return SLUG_SOLUTION[slug] ?? 'web-mobile';
+}
+
 export const projects: Project[] = [
   {
     slug: 'autoflow',

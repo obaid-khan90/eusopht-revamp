@@ -28,10 +28,10 @@ export default function ToolsHero() {
             className="text-5xl font-extrabold leading-[1.08] tracking-tight text-text-primary sm:text-6xl lg:text-7xl"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            Eusopht <span className="text-accent">Products</span>
+            Eusopht <span className="text-accent">Tools</span>
           </motion.h1>
           <motion.p variants={item} className="mt-6 max-w-2xl text-base leading-relaxed text-text-secondary sm:text-lg">
-            We build powerful, intuitive tools designed to simplify complex workflows. Discover how our purpose-built products can accelerate your business — and see the engineering we bring to every project.
+            We build powerful, intuitive tools designed to simplify complex workflows. Discover how our purpose-built tools can accelerate your business — and see the engineering we bring to every project.
           </motion.p>
         </motion.div>
       </div>

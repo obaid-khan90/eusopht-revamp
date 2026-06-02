@@ -45,7 +45,7 @@ const megaMenu = [
 const navLinks = [
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Clients', href: '/clients' },
-  { label: 'Products', href: '/tools' },
+  { label: 'Tools', href: '/tools' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ];

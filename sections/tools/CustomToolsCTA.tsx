@@ -19,7 +19,7 @@ export default function CustomToolsCTA() {
           Want Custom Tools Built?
         </h2>
         <p className="mx-auto max-w-xl text-base text-white/80 mb-7">
-          Our products showcase our engineering capability. Let&apos;s discuss how we can build specialised, rapid automation and AI solutions for your specific business needs.
+          Our tools showcase our engineering capability. Let&apos;s discuss how we can build specialised, rapid automation and AI solutions for your specific business needs.
         </p>
         <a
           href="#contact"

@@ -60,7 +60,7 @@ export default function MergeMagicProduct() {
       <div className="mx-auto max-w-6xl px-6">
         {/* Header */}
         <AnimatedSection>
-          <Badge>Product 02</Badge>
+          <Badge>Tool 02</Badge>
           <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <h2
               className="text-4xl font-bold text-text-primary lg:text-5xl"

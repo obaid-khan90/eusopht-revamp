@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import PortfolioHero from '@/sections/portfolio/PortfolioHero';
 import FeaturedCarousels from '@/sections/portfolio/FeaturedCarousels';
-import PortfolioGrid from '@/sections/portfolio/PortfolioGrid';
+import CategorySections from '@/sections/portfolio/CategorySections';
 import IndustriesStrip from '@/sections/portfolio/IndustriesStrip';
 import CTABanner from '@/sections/home/CTABanner';
 import ContactForm from '@/sections/home/ContactForm';
@@ -34,7 +34,7 @@ export default function PortfolioPage() {
     <>
       <PortfolioHero />
       <FeaturedCarousels projects={featured} />
-      <PortfolioGrid items={rest} />
+      <CategorySections items={rest} />
       <IndustriesStrip />
       <CTABanner />
       <ContactForm />

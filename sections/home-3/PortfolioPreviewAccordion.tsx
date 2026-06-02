@@ -51,7 +51,7 @@ function CategoryRow({ group }: { group: WorkGroup }) {
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-text-secondary">{group.blurb}</p>
           <Link
-            href="/portfolio"
+            href={`/portfolio#${group.key}`}
             className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-all hover:gap-2.5"
           >
             View all projects <ArrowRightIcon className="h-4 w-4" />
@@ -106,7 +106,7 @@ function CategoryRow({ group }: { group: WorkGroup }) {
           {/* Last item — View All card (same width as project cards) */}
           <div className="h-[380px] w-[280px] shrink-0 sm:w-[300px] lg:w-[300px]">
             <Link
-              href="/portfolio"
+              href={`/portfolio#${group.key}`}
               className="group flex h-full w-full items-center justify-center rounded-2xl border border-dashed border-border bg-bg transition-colors hover:border-accent hover:bg-accent-light"
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-6 py-3 text-sm font-semibold text-text-primary shadow-sm transition-colors group-hover:border-accent group-hover:text-accent">
