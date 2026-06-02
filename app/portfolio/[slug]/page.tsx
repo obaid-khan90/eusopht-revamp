@@ -3,11 +3,12 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  ArrowLeftIcon,
   ArrowRightIcon,
+  ArrowUpRightIcon,
   CheckCircleIcon,
+  ChevronRightIcon,
 } from '@heroicons/react/24/outline';
-import { projects, getProject, TECH_META } from '@/sections/portfolio/portfolioData';
+import { projects, getProject, TECH_META, metaOf } from '@/sections/portfolio/portfolioData';
 import TechIcon from '@/components/ui/TechIcon';
 import ContactForm from '@/sections/home/ContactForm';
 
@@ -40,89 +41,147 @@ export default async function ProjectDetailPage(props: PageProps<'/portfolio/[sl
 
   const isMobile = project.platforms.includes('ios') || project.platforms.includes('android');
 
-  // First platform link that is live (not a "coming soon" placeholder)
   const visitLink = project.platforms
     .map((plat) => project.platformLinks?.[plat])
     .find((link) => link && !link.toLowerCase().includes('coming soon'));
 
+  // Next project (wraps around) for the footer nav
+  const idx = projects.findIndex((p) => p.slug === project.slug);
+  const next = projects[(idx + 1) % projects.length];
+
+  const meta = metaOf(project.slug);
+
+  const sections = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'features', label: 'Features' },
+    { id: 'results', label: 'Results' },
+    { id: 'stack', label: 'Tech Stack' },
+  ];
+
   return (
     <>
-      {/* Hero */}
+      {/* ── Hero — split editorial ──────────────────────────────── */}
       <section className="relative overflow-hidden">
         <div aria-hidden className="absolute inset-0" style={{ background: 'linear-gradient(110deg, #d1fae5 0%, #ecfdf5 22%, #f0f9ff 55%, #dbeafe 100%)' }} />
-        <div className="relative mx-auto max-w-6xl px-6 pt-32 pb-16 text-center">
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-accent transition-colors"
-          >
-            <ArrowLeftIcon className="h-4 w-4" />
-            Back to Portfolio
-          </Link>
+        <div aria-hidden className="pointer-events-none absolute -top-32 right-0 h-[28rem] w-[28rem] rounded-full bg-accent/10 blur-[120px]" />
 
-          <div className="mt-8 flex justify-center">
-            <span className="rounded-full bg-accent-light px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent">
-              {project.category}
-            </span>
-          </div>
-          <h1
-            className="mt-5 text-4xl font-extrabold tracking-tight text-text-primary sm:text-5xl lg:text-6xl"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            {project.title}
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-text-secondary sm:text-lg">
-            {project.description}
-          </p>
+        <div className="relative mx-auto max-w-7xl px-6 pt-32 pb-20">
+          <nav className="mb-10 flex items-center gap-1.5 text-xs font-medium text-text-muted">
+            <Link href="/" className="transition-colors hover:text-accent">Home</Link>
+            <ChevronRightIcon className="h-3 w-3" />
+            <Link href="/portfolio" className="transition-colors hover:text-accent">Portfolio</Link>
+            <ChevronRightIcon className="h-3 w-3" />
+            <span className="text-text-primary">{project.title}</span>
+          </nav>
 
-          {/* Visit button — first live platform link, else coming-soon */}
-          <div className="mt-8 flex justify-center">
-            {visitLink ? (
-              <a
-                href={visitLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary inline-flex items-center gap-2 px-7 py-3.5 text-base font-semibold text-white"
-              >
-                Visit Now
-                <ArrowRightIcon className="h-5 w-5" />
-              </a>
-            ) : (
-              <span className="inline-flex cursor-not-allowed items-center gap-2 rounded-xl border border-border bg-white/60 px-7 py-3.5 text-base font-semibold text-text-muted">
-                Coming Soon
-              </span>
-            )}
-          </div>
-        </div>
-      </section>
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+            {/* Left — copy */}
+            <div className="max-w-xl">
+              <div className="flex items-center gap-4">
+                <span className="inline-flex shrink-0 rounded-full bg-accent-light px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent">
+                  {project.category}
+                </span>
+                <span aria-hidden className="h-px flex-1 bg-accent/40" />
+              </div>
+              <div className="mt-5 flex items-end justify-between gap-4">
+                <h1
+                  className="text-4xl font-extrabold leading-[1.05] tracking-tight text-text-primary sm:text-5xl lg:text-6xl"
+                  style={{ fontFamily: 'var(--font-display)' }}
+                >
+                  {project.title}
+                </h1>
+                <div className="hidden shrink-0 items-center gap-2 pb-1 sm:flex">
+                  {project.technologies.slice(0, 5).map((t) => {
+                    const meta = TECH_META[t];
+                    return (
+                      <span
+                        key={t}
+                        title={t}
+                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-white/70 backdrop-blur-sm"
+                      >
+                        <TechIcon name={t} icon={meta?.icon ?? ''} color={meta?.color ?? '94A3B8'} />
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-text-secondary sm:text-lg">
+                {project.description}
+              </p>
 
-      {/* Mockup showcase */}
-      <section className="bg-white py-16">
-        <div className="mx-auto max-w-5xl px-6">
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-linear-to-br from-slate-50 to-slate-100 p-6 shadow-sm sm:p-10">
-            <div className="relative mx-auto aspect-[16/9] w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-white shadow-md">
-              <Image
-                src={project.imageDesktop ?? project.image}
-                alt={`${project.title} preview`}
-                fill
-                sizes="(max-width:1024px) 100vw, 60vw"
-                className={isMobile ? 'object-contain p-4' : 'object-cover object-top'}
-                priority
-              />
+              {/* Stat tiles */}
+              <div className="mt-9 flex flex-wrap gap-3">
+                {[
+                  { label: 'Industry', value: meta.industry },
+                  { label: 'Platforms', value: project.platforms.map((p) => (p === 'ios' ? 'iOS' : p === 'android' ? 'Android' : 'Web')).join(', ') },
+                  { label: 'Built', value: meta.highlight },
+                ].map((s) => (
+                  <div key={s.label} className="min-w-[7rem] flex-1 rounded-2xl border border-white/60 bg-white/50 p-4 backdrop-blur-sm">
+                    <p className="text-lg font-bold leading-tight text-text-primary">{s.value}</p>
+                    <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-wide text-text-muted">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA */}
+              <div className="mt-8 flex flex-wrap items-center gap-5">
+                {visitLink ? (
+                  <a href={visitLink} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center gap-2 px-7 py-3.5 text-base font-semibold text-white">
+                    Visit Live Site <ArrowUpRightIcon className="h-5 w-5" />
+                  </a>
+                ) : (
+                  <span className="inline-flex cursor-not-allowed items-center gap-2 rounded-xl border border-border bg-white/60 px-7 py-3.5 text-base font-semibold text-text-muted">
+                    Coming Soon
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Right — mockup (shadow + rounded, no frame) */}
+            <div className="relative flex justify-center">
+              <div className="relative inline-block max-h-[70vh] overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/15">
+                <Image
+                  src={project.image}
+                  alt={`${project.title} preview`}
+                  width={800}
+                  height={900}
+                  sizes="(max-width:1024px) 100vw, 50vw"
+                  className="mx-auto h-auto max-h-[70vh] w-auto max-w-full object-contain"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Body: overview + results | features + tech */}
-      <section className="py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-            {/* Left 2/3 */}
-            <div className="space-y-12 lg:col-span-2">
-              <div>
-                <div className="mb-4 flex items-center gap-3">
+      {/* ── Body — sticky sidebar + content ─────────────────────── */}
+      <section className="bg-bg py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[200px_1fr] lg:gap-12">
+            {/* Sticky jump nav */}
+            <aside className="hidden lg:block">
+              <nav className="sticky top-28 flex flex-col gap-1">
+                <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-text-muted">On this page</p>
+                {sections.map((s) => (
+                  <a
+                    key={s.id}
+                    href={`#${s.id}`}
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-accent-light hover:text-accent"
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </nav>
+            </aside>
+
+            {/* Content — white card for contrast against the section bg */}
+            <div className="min-w-0 space-y-16 rounded-3xl border border-border bg-white p-8 shadow-sm sm:p-10 lg:p-12">
+              {/* Overview */}
+              <div id="overview" className="scroll-mt-28">
+                <div className="mb-5 flex items-center gap-3">
                   <span className="h-6 w-1.5 rounded-full bg-accent" />
-                  <h2 className="text-2xl font-bold text-text-primary" style={{ fontFamily: 'var(--font-display)' }}>
+                  <h2 className="text-2xl font-bold text-text-primary sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>
                     Overview
                   </h2>
                 </div>
@@ -131,41 +190,48 @@ export default async function ProjectDetailPage(props: PageProps<'/portfolio/[sl
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-border bg-white p-7 shadow-sm">
-                <div className="mb-4 flex items-center gap-3">
-                  <span className="h-6 w-1.5 rounded-full bg-emerald-500" />
-                  <h2 className="text-2xl font-bold text-text-primary" style={{ fontFamily: 'var(--font-display)' }}>
-                    Key Results
+              {/* Features */}
+              <div id="features" className="scroll-mt-28">
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="h-6 w-1.5 rounded-full bg-accent" />
+                  <h2 className="text-2xl font-bold text-text-primary sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>
+                    Key Features
+                  </h2>
+                </div>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {project.features.map((f) => (
+                    <div key={f} className="flex items-start gap-3 rounded-2xl border border-border bg-bg p-5 transition-colors hover:border-accent/30">
+                      <CheckCircleIcon className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                      <span className="text-sm leading-relaxed text-text-secondary">{f}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Results */}
+              <div id="results" className="scroll-mt-28">
+                <div className="mb-5 flex items-center gap-3">
+                  <span className="h-6 w-1.5 rounded-full bg-accent" />
+                  <h2 className="text-2xl font-bold text-text-primary sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>
+                    Results & Impact
                   </h2>
                 </div>
                 <p className="text-base leading-relaxed text-text-secondary">{project.results}</p>
               </div>
-            </div>
 
-            {/* Right 1/3 */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="mb-4 text-lg font-bold text-text-primary">Key Features</h3>
-                <ul className="space-y-3">
-                  {project.features.map((f) => (
-                    <li key={f} className="flex items-start gap-3">
-                      <CheckCircleIcon className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                      <span className="text-sm leading-relaxed text-text-secondary">{f}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="mb-4 text-lg font-bold text-text-primary">Tech Stack</h3>
-                <div className="flex flex-wrap gap-2">
+              {/* Tech stack */}
+              <div id="stack" className="scroll-mt-28">
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="h-6 w-1.5 rounded-full bg-accent" />
+                  <h2 className="text-2xl font-bold text-text-primary sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>
+                    Tech Stack
+                  </h2>
+                </div>
+                <div className="flex flex-wrap gap-3">
                   {project.technologies.map((t) => {
                     const meta = TECH_META[t];
                     return (
-                      <span
-                        key={t}
-                        className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-3 py-1.5 text-xs font-medium text-text-primary shadow-xs"
-                      >
+                      <span key={t} className="inline-flex items-center gap-2.5 rounded-xl border border-border bg-white px-4 py-2.5 text-sm font-medium text-text-primary shadow-xs">
                         <TechIcon name={t} icon={meta?.icon ?? ''} color={meta?.color ?? '94A3B8'} />
                         {t}
                       </span>
@@ -178,6 +244,27 @@ export default async function ProjectDetailPage(props: PageProps<'/portfolio/[sl
         </div>
       </section>
 
+      {/* ── Next project ────────────────────────────────────────── */}
+      <section className="bg-bg py-14">
+        <div className="mx-auto max-w-7xl px-6">
+          <Link
+            href={`/portfolio/${next.slug}`}
+            className="group flex flex-col items-start justify-between gap-6 rounded-3xl border border-border bg-white p-7 transition-all hover:border-accent/40 hover:shadow-lg hover:shadow-black/5 sm:flex-row sm:items-center sm:p-9"
+          >
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-text-muted">Next Project</p>
+              <h3 className="mt-2 text-2xl font-bold text-text-primary transition-colors group-hover:text-accent sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>
+                {next.title}
+              </h3>
+              <p className="mt-1.5 max-w-md text-sm leading-relaxed text-text-secondary">{next.description}</p>
+            </div>
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-border text-text-secondary transition-all group-hover:border-accent group-hover:bg-accent group-hover:text-white">
+              <ArrowRightIcon className="h-6 w-6" />
+            </span>
+          </Link>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-20">
         <div className="mx-auto max-w-6xl px-6">
@@ -185,13 +272,13 @@ export default async function ProjectDetailPage(props: PageProps<'/portfolio/[sl
             <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
             <div aria-hidden className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
             <div className="relative">
-              <h2 className="text-3xl font-extrabold leading-tight sm:text-4xl mb-4" style={{ fontFamily: 'var(--font-display)' }}>
+              <h2 className="mb-4 text-3xl font-extrabold leading-tight sm:text-4xl" style={{ fontFamily: 'var(--font-display)' }}>
                 Inspired by this Project?
               </h2>
-              <p className="mx-auto max-w-xl text-lg text-white/80 mb-8">
+              <p className="mx-auto mb-8 max-w-xl text-lg text-white/80">
                 Let&apos;s discuss how we can build something similar for your business. We turn ideas into scalable, production-ready solutions.
               </p>
-              <a href="#contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-lg font-semibold text-accent hover:bg-white/90 transition-colors shadow-sm">
+              <a href="#contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-lg font-semibold text-accent shadow-sm transition-colors hover:bg-white/90">
                 Start Your Project
                 <ArrowRightIcon className="h-5 w-5" />
               </a>

@@ -90,6 +90,43 @@ export function solutionOf(slug: string): SolutionKey {
   return SLUG_SOLUTION[slug] ?? 'web-mobile';
 }
 
+/* Per-project hero meta — industry/domain + a punchy capability highlight,
+   used by the project detail hero stat tiles. */
+export interface ProjectMeta {
+  industry: string;
+  highlight: string;
+}
+
+const PROJECT_META: Record<string, ProjectMeta> = {
+  'autoflow': { industry: 'Automotive', highlight: 'Real-Time' },
+  'cricketmood': { industry: 'Sports', highlight: 'Real-Time' },
+  'vizii': { industry: 'FinTech', highlight: 'AI-Powered' },
+  'learning-cert': { industry: 'EdTech', highlight: 'Cloud-Based' },
+  'postmerica': { industry: 'eCommerce', highlight: 'Automated' },
+  'midwifex': { industry: 'HealthTech', highlight: 'Cross-Platform' },
+  'social-media-blast': { industry: 'Social Media', highlight: 'AI-Powered' },
+  'canezo': { industry: 'Business Ops', highlight: 'Automated' },
+  'meu-exotico': { industry: 'eCommerce', highlight: 'Scalable' },
+  'uandi-wallet': { industry: 'FinTech', highlight: 'Secure' },
+  'nullship': { industry: 'Logistics', highlight: 'Multi-Carrier' },
+  'autosmart-australia': { industry: 'eCommerce', highlight: 'Scalable' },
+  'evalu': { industry: 'EdTech', highlight: 'AI-Powered' },
+  'vital-group': { industry: 'Security', highlight: 'SEO-Optimised' },
+  'guidewire-aid': { industry: 'HealthTech', highlight: 'AI-Assisted' },
+  'slym-yoga': { industry: 'Wellness', highlight: 'Cross-Platform' },
+  'organaise': { industry: 'Productivity', highlight: 'AI-Powered' },
+  'autosmart-axis': { industry: 'Automotive', highlight: 'Cloud-Based' },
+  'webees': { industry: 'Social', highlight: 'Cross-Platform' },
+  'mensa-pay': { industry: 'FinTech', highlight: 'Multi-Currency' },
+  'job-application-portal': { industry: 'HR Tech', highlight: 'MVP' },
+  'exhibitpro': { industry: 'Events', highlight: 'Scalable' },
+  'security-world': { industry: 'Security', highlight: 'SEO-Optimised' },
+};
+
+export function metaOf(slug: string): ProjectMeta {
+  return PROJECT_META[slug] ?? { industry: 'Custom Software', highlight: 'Production-Ready' };
+}
+
 export const projects: Project[] = [
   {
     slug: 'autoflow',
@@ -132,7 +169,7 @@ export const projects: Project[] = [
     results:
       'Keeps fans engaged with instant, reliable match updates and a smooth, fast experience across devices.',
     platforms: ['ios', 'android'],
-    image: '/cricketmood1.png',
+    image: '/7.png',
   },
   {
     slug: 'vizii',
@@ -221,7 +258,7 @@ export const projects: Project[] = [
     results:
       'Empowers users with trusted medical insights, improves pregnancy planning and tracking, and enables seamless access to professional midwifery support through digital consultations and AI-assisted guidance.',
     platforms: ['ios', 'android'],
-    image: '/midwifex_mobile.png',
+    image: '/Midwife.png',
     imageDesktop: '/midwifex_desktop.png',
   },
   {
@@ -326,8 +363,8 @@ export const projects: Project[] = [
     results:
       'Reduces shipping costs and improves delivery reliability for retailers through discounted, automated fulfillment.',
     platforms: ['web'],
-    image: '/nullship.png',
-    imageDesktop: '/null-ship.png',
+    image: '/null-ship.png',
+    imageDesktop: '/Null-ship-banner2.png',
     platformLinks: { web: 'https://nullship.gg' },
   },
   {
@@ -348,8 +385,8 @@ export const projects: Project[] = [
     results:
       'Supports a leading supplier’s online sales with a reliable, scalable storefront and streamlined order management.',
     platforms: ['web'],
-    image: '/autosmart.png',
-    imageDesktop: '/autosmart1.png',
+    image: '/autosmart2.png',
+    imageDesktop: '/autosmart.png',
     platformLinks: { web: 'https://autosmartaustralia.com.au' },
   },
   {
@@ -518,7 +555,7 @@ export const projects: Project[] = [
     results:
       'Delivers a fast, secure payments experience with the compliance and reliability fintech users expect.',
     platforms: ['ios', 'android'],
-    image: '/mensapay.png',
+    image: '/mensa.png',
     imageDesktop: '/mensa.png',
   },
   {
@@ -560,7 +597,7 @@ export const projects: Project[] = [
     results:
       'Boosts on-site artwork sales and gives organisers live visibility into performance during exhibitions.',
     platforms: ['web'],
-    image: '/security-world1.png',
+    image: '/security-world.png',
   },
   {
     slug: 'security-world',

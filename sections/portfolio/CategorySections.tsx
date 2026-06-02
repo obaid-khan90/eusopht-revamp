@@ -1,16 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import AnimatedSection from '@/components/ui/AnimatedSection';
+import SectionHeader from '@/components/ui/SectionHeader';
 import ProjectCard from '@/components/ui/ProjectCard';
 import {
   projects as allProjects,
   SOLUTION_GROUPS,
   solutionOf,
   type Project,
-  type SolutionGroup,
+  type SolutionKey,
 } from './portfolioData';
 
 // Grid-card-only image overrides (detail pages keep their own image).
@@ -20,49 +20,72 @@ const CARD_IMAGE: Record<string, string> = {
   'mensa-pay': '/mensa.png',
 };
 
-function CategoryBlock({ group, projects }: { group: SolutionGroup; projects: Project[] }) {
-  const [open, setOpen] = useState(true);
+export default function CategorySections({ items = allProjects }: { items?: Project[] }) {
+  const [active, setActive] = useState<SolutionKey>(SOLUTION_GROUPS[0].key);
+
+  // Activate the tab matching the URL hash (e.g. /portfolio#automation) and scroll to it
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '') as SolutionKey;
+    if (SOLUTION_GROUPS.some((g) => g.key === hash)) {
+      setActive(hash);
+      // wait a frame so the section is laid out, then scroll into view
+      requestAnimationFrame(() => {
+        document.getElementById('our-work')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }, []);
+
+  const group = SOLUTION_GROUPS.find((g) => g.key === active) ?? SOLUTION_GROUPS[0];
+  const countFor = (key: SolutionKey) => items.filter((p) => solutionOf(p.slug) === key).length;
+  const groupProjects = items.filter((p) => solutionOf(p.slug) === group.key);
 
   return (
-    <section id={group.key} className="scroll-mt-28">
-      <AnimatedSection className="mb-10 flex items-start justify-between gap-6">
-        <div className="flex items-start gap-5">
-          <span aria-hidden className="mt-1 hidden h-12 w-1 shrink-0 rounded-full bg-accent lg:block" />
-          <div>
-            <h2
-              className="text-3xl font-bold leading-tight text-text-primary sm:text-4xl"
-              style={{ fontFamily: 'var(--font-display)' }}
+    <section id="our-work" className="scroll-mt-28">
+      <div className="mx-auto max-w-7xl px-6 py-20">
+        <AnimatedSection className="flex flex-col items-center text-center">
+          <SectionHeader
+            overline="Our Work"
+            headline="Projects across every solution"
+            subtitle="Explore what we've shipped — grouped by the kind of problem we solved."
+            centered
+          />
+        </AnimatedSection>
+
+        {/* Tabs */}
+        <AnimatedSection className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          {SOLUTION_GROUPS.map((g) => (
+            <button
+              key={g.key}
+              onClick={() => setActive(g.key)}
+              className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all ${
+                active === g.key
+                  ? 'bg-accent text-white shadow-sm'
+                  : 'border border-border bg-white text-text-secondary hover:border-accent hover:text-accent'
+              }`}
             >
-              {group.label}
-            </h2>
-            <p className="mt-2 max-w-2xl text-base leading-relaxed text-text-secondary">
-              {group.blurb}
-            </p>
-          </div>
-        </div>
+              {g.label}
+              <span className={`text-xs ${active === g.key ? 'text-white/70' : 'text-text-muted'}`}>
+                {countFor(g.key)}
+              </span>
+            </button>
+          ))}
+        </AnimatedSection>
 
-        {/* Collapse toggle — end of heading row */}
-        <button
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-label={open ? `Collapse ${group.label}` : `Expand ${group.label}`}
-          className="mt-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-white text-text-secondary shadow-sm transition-colors hover:border-accent hover:text-accent"
-        >
-          <ChevronDownIcon className={`h-5 w-5 transition-transform duration-300 ${open ? 'rotate-180' : ''}`} />
-        </button>
-      </AnimatedSection>
+        {/* Blurb */}
+        <p className="mt-6 text-center text-sm text-text-secondary">{group.blurb}</p>
 
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="overflow-hidden"
-          >
-            <div className="grid grid-cols-1 gap-6 pb-1 sm:grid-cols-2 lg:grid-cols-3">
-              {projects.map((p, i) => (
+        {/* Grid */}
+        <div className="mt-10">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={group.key}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 16 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              {groupProjects.map((p) => (
                 <div key={p.slug} className="h-[420px]">
                   <ProjectCard
                     href={`/portfolio/${p.slug}`}
@@ -75,24 +98,10 @@ function CategoryBlock({ group, projects }: { group: SolutionGroup; projects: Pr
                   />
                 </div>
               ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </section>
-  );
-}
-
-export default function CategorySections({ items = allProjects }: { items?: Project[] }) {
-  return (
-    <div className="mx-auto max-w-7xl px-6 py-20">
-      <div className="flex flex-col gap-24">
-        {SOLUTION_GROUPS.map((group) => {
-          const groupProjects = items.filter((p) => solutionOf(p.slug) === group.key);
-          if (groupProjects.length === 0) return null;
-          return <CategoryBlock key={group.key} group={group} projects={groupProjects} />;
-        })}
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
