@@ -63,34 +63,54 @@ export default function AISolutions() {
 
         {/* Bento grid */}
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
-          {tiles.map((t, i) => (
-            <AnimatedSection
-              key={t.title}
-              delay={(i % 2) * 0.08}
-              className={`${t.className} h-full`}
-            >
-              <div className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg hover:shadow-black/8">
-                {/* Mock — smaller, fixed height, clipped to the box */}
-                <div className="relative h-[180px] shrink-0 overflow-hidden border-b border-border bg-bg">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-full origin-center" style={{ transform: `scale(${t.scale})` }}>
-                      <t.Mock />
-                    </div>
+          {tiles.map((t, i) => {
+            // Tiles 1 and 4 (index 0, 3) → copy first, then mock. Tiles 2 and 3 → mock first.
+            const copyFirst = i === 0 || i === 3;
+
+            const mock = (
+              <div className={`relative h-[200px] shrink-0 overflow-hidden bg-bg ${copyFirst ? 'border-t border-border' : 'border-b border-border'}`}>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-full origin-center" style={{ transform: `scale(${t.scale})` }}>
+                    <t.Mock />
                   </div>
-                </div>
-                {/* Copy */}
-                <div className="flex flex-1 flex-col p-8">
-                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-light">
-                    <t.icon className="h-7 w-7 text-accent" />
-                  </div>
-                  <h3 className="mb-3 text-2xl font-bold leading-tight text-text-primary">
-                    {t.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-text-secondary lg:text-base">{t.body}</p>
                 </div>
               </div>
-            </AnimatedSection>
-          ))}
+            );
+
+            const copy = (
+              <div className="flex flex-1 flex-col p-8">
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-light">
+                  <t.icon className="h-7 w-7 text-accent" />
+                </div>
+                <h3 className="mb-3 text-2xl font-bold leading-tight text-text-primary">
+                  {t.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-text-secondary lg:text-base">{t.body}</p>
+              </div>
+            );
+
+            return (
+              <AnimatedSection
+                key={t.title}
+                delay={(i % 2) * 0.08}
+                className={`${t.className} h-full`}
+              >
+                <div className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg hover:shadow-black/8">
+                  {copyFirst ? (
+                    <>
+                      {copy}
+                      {mock}
+                    </>
+                  ) : (
+                    <>
+                      {mock}
+                      {copy}
+                    </>
+                  )}
+                </div>
+              </AnimatedSection>
+            );
+          })}
         </div>
       </div>
     </section>
