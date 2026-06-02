@@ -19,7 +19,7 @@ export default function Home() {
       <PortfolioPreview />
       <Testimonials />
       <StatsSection />
-<FAQ />
+      <FAQ />
       <CTABanner />
       <ContactForm />
     </>
