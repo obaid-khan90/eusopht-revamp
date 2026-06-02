@@ -26,14 +26,9 @@ export default function PortfolioPreviewAccordion() {
                 <div className="flex gap-5 lg:sticky lg:top-28 lg:self-start">
                   <span aria-hidden className="hidden w-1 shrink-0 rounded-full bg-accent lg:block" />
                   <div>
-                    <div className="flex items-center gap-3">
-                      <h3 className="text-2xl font-bold text-text-primary" style={{ fontFamily: 'var(--font-display)' }}>
-                        {g.label}
-                      </h3>
-                      <span className="rounded-full bg-accent-light px-2.5 py-0.5 text-xs font-semibold text-accent">
-                        {g.projects.length}
-                      </span>
-                    </div>
+                    <h3 className="text-2xl font-bold text-text-primary" style={{ fontFamily: 'var(--font-display)' }}>
+                      {g.label}
+                    </h3>
                     <p className="mt-2 text-sm leading-relaxed text-text-secondary">{g.blurb}</p>
                     <Link
                       href="/portfolio"
@@ -46,7 +41,7 @@ export default function PortfolioPreviewAccordion() {
 
                 {/* Right — cards row */}
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {g.projects.map((p) => (
+                  {g.projects.slice(0, 3).map((p) => (
                     <div key={p.title} className="h-[380px]">
                       <ProjectCard
                         href={p.href}
