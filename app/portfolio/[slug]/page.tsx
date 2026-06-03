@@ -11,6 +11,7 @@ import {
 import { projects, getProject, TECH_META, metaOf } from '@/sections/portfolio/portfolioData';
 import TechIcon from '@/components/ui/TechIcon';
 import ContactForm from '@/sections/home/ContactForm';
+import CaseStudyProgress from '@/sections/portfolio/CaseStudyProgress';
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -159,20 +160,9 @@ export default async function ProjectDetailPage(props: PageProps<'/portfolio/[sl
       <section className="bg-bg py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[200px_1fr] lg:gap-12">
-            {/* Sticky jump nav */}
-            <aside className="hidden lg:block">
-              <nav className="sticky top-28 flex flex-col gap-1">
-                <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-text-muted">On this page</p>
-                {sections.map((s) => (
-                  <a
-                    key={s.id}
-                    href={`#${s.id}`}
-                    className="rounded-lg px-3 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-accent-light hover:text-accent"
-                  >
-                    {s.label}
-                  </a>
-                ))}
-              </nav>
+            {/* Sticky progress sidebar (from v3) */}
+            <aside>
+              <CaseStudyProgress sections={sections} />
             </aside>
 
             {/* Content — white card for contrast against the section bg */}
