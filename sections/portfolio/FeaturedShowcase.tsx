@@ -23,7 +23,7 @@ const SHOWCASE_IMAGE: Record<string, string> = {
 function InfoCard({ p, image }: { p: Project; image: string }) {
   const visitLink = p.platforms
     .map((pl) => p.platformLinks?.[pl])
-    .find((l) => l && !l.toLowerCase().includes('coming soon')) ?? `/portfolio/${p.slug}`;
+    .find((l) => l && !l.toLowerCase().includes('coming soon')) ?? `/project/${p.slug}`;
 
   return (
     <a
@@ -114,7 +114,7 @@ function ResultsCard({ p, dark }: { p: Project; dark: boolean }) {
         {/* View button — bottom right */}
         <div className="mt-5 flex items-end justify-end">
           <a
-            href={visitLink ?? `/portfolio/${p.slug}`}
+            href={visitLink ?? `/project/${p.slug}`}
             target={visitLink ? '_blank' : undefined}
             rel={visitLink ? 'noopener noreferrer' : undefined}
             className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${linkCls}`}

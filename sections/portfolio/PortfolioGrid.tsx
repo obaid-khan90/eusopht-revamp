@@ -60,7 +60,7 @@ export default function PortfolioGrid({ items = projects }: { items?: Project[] 
               className="h-[420px]"
             >
               <ProjectCard
-                href={`/portfolio/${p.slug}`}
+                href={`/project/${p.slug}`}
                 image={CARD_IMAGE[p.slug] ?? p.image}
                 title={p.title}
                 category={p.category}

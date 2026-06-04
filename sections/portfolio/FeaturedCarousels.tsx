@@ -86,7 +86,7 @@ function ResultsPanel({ p }: { p: Project }) {
       </div>
       <div className="mt-5">
         <a
-          href={visitLink ?? `/portfolio/${p.slug}`}
+          href={visitLink ?? `/project/${p.slug}`}
           target={visitLink ? '_blank' : undefined}
           rel={visitLink ? 'noopener noreferrer' : undefined}
           className="inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary transition-colors hover:text-accent mt-5"
@@ -147,7 +147,7 @@ function ProjectCarousel({ p, reversed = false }: { p: Project; reversed?: boole
                     Coming Soon
                   </span>
                 )}
-                <a href={`/portfolio/${p.slug}`}
+                <a href={`/project/${p.slug}`}
                   className="inline-flex items-center gap-2 rounded-xl border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/15">
                   Case Study <ArrowRightIcon className="h-4 w-4" />
                 </a>

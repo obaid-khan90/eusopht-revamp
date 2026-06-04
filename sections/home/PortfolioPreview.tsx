@@ -10,7 +10,7 @@ const projects = [
     description: 'Car Dealership Web & App Portal — full inventory management, lead capture, and customer dashboard developed for AutoFlow.',
     tags: ['Laravel', 'Vue.js'],
     image: '/autoflow1.png',
-    href: '/portfolio/autoflow',
+    href: '/project/autoflow',
   },
   {
     title: 'Learning Cert',
@@ -18,7 +18,7 @@ const projects = [
     description: 'A custom-built certification & training platform for corporate training providers, with course management and analytics.',
     tags: ['Nuxt', 'Laravel'],
     image: '/LearningCert.png',
-    href: '/portfolio/learning-cert',
+    href: '/project/learning-cert',
   },
   {
     title: 'AiBuddy — Social Media Blast',
@@ -26,7 +26,7 @@ const projects = [
     description: 'AI-powered social media management platform that automates content creation and publishing across multiple channels.',
     tags: ['React', 'TypeScript', 'OpenAI'],
     image: '/AIBuddyf.png',
-    href: '/portfolio/social-media-blast',
+    href: '/project/social-media-blast',
   },
   {
     title: 'Null Ship',
@@ -34,7 +34,7 @@ const projects = [
     description: 'Modern shipping and logistics platform with real-time tracking, label generation, and multi-carrier integration.',
     tags: ['Next.js', 'Node.js', 'Stripe'],
     image: '/null-ship.png',
-    href: '/portfolio/nullship',
+    href: '/project/nullship',
   },
   {
     title: 'MidwifeX',
@@ -42,7 +42,7 @@ const projects = [
     description: 'Healthcare platform for midwives — patient intake, scheduling, billing and clinical notes in one unified system.',
     tags: ['React', 'Firebase'],
     image: '/midwifex.png',
-    href: '/portfolio/midwifex',
+    href: '/project/midwifex',
   },
   {
     title: 'Mensa Pay',
@@ -50,7 +50,7 @@ const projects = [
     description: 'Digital payments and wallet platform with KYC, multi-currency support, and merchant onboarding flow.',
     tags: ['Flutter', 'Node.js'],
     image: '/mensa.png',
-    href: '/portfolio/mensa-pay',
+    href: '/project/mensa-pay',
   },
 ];
 

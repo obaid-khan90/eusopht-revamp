@@ -173,7 +173,7 @@ export default function Showroom({ projects }: { projects: Project[] }) {
                         </span>
                       )}
                       <a
-                        href={`/portfolio/${p.slug}`}
+                        href={`/project/${p.slug}`}
                         className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 py-3 text-sm font-semibold text-text-primary transition-colors hover:border-accent hover:bg-accent-light"
                       >
                         View Case Study

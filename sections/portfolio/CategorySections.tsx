@@ -88,7 +88,7 @@ export default function CategorySections({ items = allProjects }: { items?: Proj
               {groupProjects.map((p) => (
                 <div key={p.slug} className="h-[420px]">
                   <ProjectCard
-                    href={`/portfolio/${p.slug}`}
+                    href={`/project/${p.slug}`}
                     image={CARD_IMAGE[p.slug] ?? p.image}
                     title={p.title}
                     category={p.category}
