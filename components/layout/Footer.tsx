@@ -12,10 +12,10 @@ const serviceLinks = [
 
 const companyLinks = [
   { label: 'Portfolio', href: '/portfolio' },
-  { label: 'Clients', href: '/clients' },
+  // { label: 'Clients', href: '/clients' },
   { label: 'Tools', href: '/tools' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Contact', href: '/contact-us' },
 ];
 
 const resourceLinks = [

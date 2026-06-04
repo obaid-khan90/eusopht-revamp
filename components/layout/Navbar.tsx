@@ -43,11 +43,12 @@ const megaMenu = [
 ];
 
 const navLinks = [
+  { label: 'About', href: '/about-us' },
   { label: 'Portfolio', href: '/portfolio' },
-  { label: 'Clients', href: '/clients' },
+  // { label: 'Clients', href: '/clients' },
   { label: 'Tools', href: '/tools' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Contact', href: '/contact-us' },
 ];
 
 export default function Navbar() {
