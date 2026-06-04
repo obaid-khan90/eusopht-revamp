@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import AboutHero from '@/sections/about/AboutHero';
 import AboutMission from '@/sections/about/AboutMission';
-import AboutTeam from '@/sections/about/AboutTeam';
 import StatsSection from '@/sections/home/StatsSection';
 import ProcessSection from '@/sections/home/ProcessSection';
 import Testimonials from '@/sections/home/Testimonials';
@@ -27,8 +26,7 @@ export default function AboutPage() {
       <AboutHero />
       <AboutMission />
       <StatsSection />
-      <AboutTeam />
-      <ProcessSection />
+<ProcessSection />
       <Testimonials />
       <CTABanner />
       <ContactForm />
