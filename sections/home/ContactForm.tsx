@@ -100,7 +100,7 @@ export default function ContactForm() {
             <AnimatedSection className="lg:col-span-2">
               <div className="flex flex-col gap-3 h-full">
                 <a
-                  href="mailto:info@eusopht.com"
+                  href="mailto:contact@eusopht.com"
                   className="flex items-center gap-3 rounded-xl border border-border bg-white p-4 hover:border-accent/30 hover:shadow-sm transition-all"
                 >
                   <div className="h-10 w-10 rounded-lg bg-accent-light flex items-center justify-center shrink-0">
@@ -108,7 +108,7 @@ export default function ContactForm() {
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-widest text-text-muted">Email</p>
-                    <p className="text-sm font-semibold text-text-primary">info@eusopht.com</p>
+                    <p className="text-sm font-semibold text-text-primary">contact@eusopht.com</p>
                   </div>
                 </a>
 

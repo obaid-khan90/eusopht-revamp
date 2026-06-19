@@ -12,12 +12,12 @@ export default function StructuredData() {
     description:
       'Eusopht is an AI software & automation agency delivering AI agents, workflow automation, staff augmentation, and custom software to clients worldwide.',
     sameAs: [
-      'https://www.linkedin.com/company/eusopht',
-      'https://twitter.com/eusopht',
+      'https://www.linkedin.com/company/eusopht/posts/?feedView=all',
+      'https://www.facebook.com/eusopht/',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
-      email: 'info@eusopht.com',
+      email: 'contact@eusopht.com',
       contactType: 'sales',
       areaServed: 'Worldwide',
     },
@@ -29,7 +29,7 @@ export default function StructuredData() {
     name: 'Eusopht',
     image: `${SITE_URL}/logo.png`,
     url: SITE_URL,
-    email: 'info@eusopht.com',
+    email: 'contact@eusopht.com',
     telephone: '+92-300-225-9802',
     priceRange: '$$',
     address: {
