@@ -25,27 +25,33 @@ export default function DemoBookingModal({ open, onClose }: { open: boolean; onC
   const [errorMsg, setErrorMsg] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
+  const [isWeekendDate, setIsWeekendDate] = useState(false);
 
-  // Reset on open
   useEffect(() => {
     if (open) {
       setStatus('idle');
       setErrorMsg('');
       setSelectedDate('');
       setSelectedTime('');
+      setIsWeekendDate(false);
     }
   }, [open]);
 
-  // Close on Escape
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [onClose]);
 
+  function handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const val = e.target.value;
+    setSelectedDate(val);
+    setIsWeekendDate(val ? isWeekend(val) : false);
+  }
+
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!selectedDate || !selectedTime) return;
+    if (!selectedDate || !selectedTime || isWeekendDate) return;
 
     setStatus('submitting');
     setErrorMsg('');
@@ -158,13 +164,17 @@ export default function DemoBookingModal({ open, onClose }: { open: boolean; onC
                         type="date"
                         min={toDateInputMin()}
                         value={selectedDate}
-                        onChange={(e) => {
-                          if (!isWeekend(e.target.value)) setSelectedDate(e.target.value);
-                        }}
+                        onChange={handleDateChange}
                         required
-                        className="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all"
+                        className={`w-full rounded-xl border px-4 py-3 text-sm text-text-primary bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all ${
+                          isWeekendDate ? 'border-red-400' : 'border-border'
+                        }`}
                       />
-                      <p className="text-xs text-text-muted">Weekdays only (Mon – Fri)</p>
+                      {isWeekendDate ? (
+                        <p className="text-xs text-red-500">Weekends are unavailable — please pick a weekday (Mon – Fri)</p>
+                      ) : (
+                        <p className="text-xs text-text-muted">Weekdays only (Mon – Fri)</p>
+                      )}
                     </div>
 
                     {/* Time slots */}
@@ -212,7 +222,7 @@ export default function DemoBookingModal({ open, onClose }: { open: boolean; onC
 
                     <button
                       type="submit"
-                      disabled={status === 'submitting' || !selectedDate || !selectedTime}
+                      disabled={status === 'submitting' || !selectedDate || !selectedTime || isWeekendDate}
                       className="btn-primary w-full py-4 text-base font-semibold text-white disabled:opacity-60"
                     >
                       {status === 'submitting' ? 'Booking…' : 'Confirm Booking'}
