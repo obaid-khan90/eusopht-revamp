@@ -33,7 +33,7 @@ export default function ContactHero() {
           </motion.p>
           <motion.div variants={item} className="mt-10 flex flex-col gap-4 sm:flex-row">
             <a
-              href="https://wa.me/923001234567"
+              href="https://wa.me/923002259802"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-white px-7 py-3.5 text-base font-semibold text-text-primary hover:bg-accent-light hover:border-accent transition-colors"

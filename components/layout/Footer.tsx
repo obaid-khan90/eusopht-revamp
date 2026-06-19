@@ -132,9 +132,9 @@ export default function Footer() {
                 <EnvelopeIcon className="h-4 w-4 text-blue-400" />
                 info@eusopht.com
               </a>
-              <a href="tel:+923001234567" className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors">
+              <a href="tel:+923002259802" className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors">
                 <PhoneIcon className="h-4 w-4 text-blue-400" />
-                +92 300 123 4567
+                +92 300-225-9802
               </a>
             </div>
 

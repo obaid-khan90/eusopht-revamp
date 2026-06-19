@@ -5,9 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRightIcon, EyeIcon } from '@heroicons/react/24/outline';
-import { posts, categories, formatDate, type BlogCategory } from './blogData';
+import { categories, formatDate, type BlogCategory, type BlogPost } from './blogData';
 
-export default function BlogGrid() {
+export default function BlogGrid({ posts }: { posts: BlogPost[] }) {
   const [active, setActive] = useState<'All' | BlogCategory>('All');
   // only show categories that actually have posts
   const available = categories.filter(

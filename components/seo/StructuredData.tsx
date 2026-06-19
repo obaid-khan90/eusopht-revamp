@@ -30,7 +30,7 @@ export default function StructuredData() {
     image: `${SITE_URL}/logo.png`,
     url: SITE_URL,
     email: 'info@eusopht.com',
-    telephone: '+92-300-1234567',
+    telephone: '+92-300-225-9802',
     priceRange: '$$',
     address: {
       '@type': 'PostalAddress',

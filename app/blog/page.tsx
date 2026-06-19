@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import BlogHero from '@/sections/blog/BlogHero';
 import BlogGrid from '@/sections/blog/BlogGrid';
+import { posts } from '@/sections/blog/blogData';
 
 export const metadata: Metadata = {
   title: 'Blog — Insights on AI, Automation & Software',
@@ -19,7 +20,7 @@ export default function BlogPage() {
   return (
     <>
       <BlogHero />
-      <BlogGrid />
+      <BlogGrid posts={posts} />
     </>
   );
 }
