@@ -44,7 +44,7 @@ const itemVariants: Variants = {
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden pt-45 pb-20">
+    <section className="relative overflow-hidden pt-32 lg:pt-45 pb-20">
       {/* Background glow blobs */}
       <div aria-hidden className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full opacity-[0.12] blur-3xl bg-accent" />
       <div aria-hidden className="pointer-events-none absolute top-20 -right-40 h-80 w-80 rounded-full opacity-[0.07] blur-3xl bg-accent" />

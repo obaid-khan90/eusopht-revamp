@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import AnimatedSection from '@/components/ui/AnimatedSection';
@@ -110,7 +110,8 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-const PER_PAGE = 3;
+const DESKTOP_PER_PAGE = 3;
+const MOBILE_PER_PAGE = 1;
 
 function Stars({ rating }: { rating: number }) {
   return (
@@ -150,17 +151,33 @@ function Card({ t }: { t: Testimonial }) {
 }
 
 export default function Testimonials() {
-  const [page, setPage] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const desktopPageCount = Math.ceil(testimonials.length / DESKTOP_PER_PAGE);
+  const mobilePageCount = testimonials.length;
+  const [desktopPage, setDesktopPage] = useState(Math.floor(desktopPageCount / 2));
+  const [mobilePage, setMobilePage] = useState(Math.floor(mobilePageCount / 2));
   const [direction, setDirection] = useState(0);
-  const pageCount = Math.ceil(testimonials.length / PER_PAGE);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  const perPage = isMobile ? MOBILE_PER_PAGE : DESKTOP_PER_PAGE;
+  const page = isMobile ? mobilePage : desktopPage;
+  const setPage = isMobile ? setMobilePage : setDesktopPage;
+  const pageCount = Math.ceil(testimonials.length / perPage);
 
   const paginate = (dir: number) => {
     setDirection(dir);
     setPage((p) => (p + dir + pageCount) % pageCount);
   };
 
-  const start = page * PER_PAGE;
-  const current = testimonials.slice(start, start + PER_PAGE);
+  const start = page * perPage;
+  const current = testimonials.slice(start, start + perPage);
 
   return (
     <section className="py-28 overflow-hidden">
@@ -177,7 +194,7 @@ export default function Testimonials() {
         <div className="relative">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
-              key={page}
+              key={`${isMobile ? 'm' : 'd'}-${page}`}
               custom={direction}
               initial={{ opacity: 0, x: direction >= 0 ? 60 : -60 }}
               animate={{ opacity: 1, x: 0 }}

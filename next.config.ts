@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  allowedDevOrigins: ['resuscitative-tonita-lunitidal.ngrok-free.dev'],
+
+
   async redirects() {
     return [
       // About

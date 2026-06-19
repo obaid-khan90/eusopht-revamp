@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   ChatBubbleLeftRightIcon,
@@ -54,6 +54,15 @@ const channels: Channel[] = [
 
 export default function ContactLauncher() {
   const [open, setOpen] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = (e: Event) => setNavOpen((e as CustomEvent<{ open: boolean }>).detail.open);
+    window.addEventListener('mobileNavToggle', handler);
+    return () => window.removeEventListener('mobileNavToggle', handler);
+  }, []);
+
+  if (navOpen) return null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">

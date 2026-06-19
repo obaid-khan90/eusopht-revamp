@@ -56,14 +56,63 @@ export default function ServicesGrid() {
           />
         </AnimatedSection>
 
-        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Mobile: scroll-stacking cards (single narrower column) */}
+        <div className="mt-14 lg:hidden">
           {pillars.map((p, i) => {
             const teal = i % 2 === 1;
             return (
-            <AnimatedSection key={p.title} delay={i * 0.08}>
+              <div
+                key={p.title}
+                className="sticky top-28 pb-6"
+                style={{ zIndex: i + 1 }}
+              >
+                <Link
+                  href={p.href}
+                  className="group relative mx-auto flex max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-md transition-all duration-300 hover:border-accent/30"
+                >
+                  {/* Grid pattern bg */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 z-0"
+                    style={{
+                      backgroundImage: `
+                        linear-gradient(to right, #F1F5F9 1px, transparent 1px),
+                        linear-gradient(to bottom, #F1F5F9 1px, transparent 1px),
+                        radial-gradient(circle 300px at 100% 0%, rgba(37,99,235,0.04), transparent)
+                      `,
+                      backgroundSize: '36px 36px, 36px 36px, 100% 100%',
+                    }}
+                  />
+
+                  <div className="relative z-10 flex flex-col">
+                    <div className={`mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl ${teal ? 'bg-secondary-light' : 'bg-accent-light'}`}>
+                      <p.icon className={`h-6 w-6 ${teal ? 'text-secondary' : 'text-accent'}`} />
+                    </div>
+
+                    <h3 className="mb-1.5 text-xl font-bold text-text-primary">{p.title}</h3>
+                    <p className="text-sm leading-relaxed mb-4 text-text-secondary">{p.description}</p>
+
+                    <span className={`mt-auto inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5 ${teal ? 'text-secondary' : 'text-accent'}`}>
+                      Explore
+                      <ArrowRightIcon className="h-4 w-4" />
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop: original 4-column grid */}
+        <div className="mt-14 hidden lg:grid grid-cols-4 gap-5">
+          {pillars.map((p, i) => {
+            const teal = i % 2 === 1;
+            const from = i % 2 === 0 ? 'bottom-left' : 'bottom-right';
+            return (
+            <AnimatedSection key={p.title} delay={i * 0.08} from={from} className="h-full">
               <Link
                 href={p.href}
-                className="group relative block h-full overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/8 hover:border-accent/30"
+                className="group relative flex flex-col h-full overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/8 hover:border-accent/30"
               >
                 {/* Grid pattern bg */}
                 <div
@@ -80,12 +129,12 @@ export default function ServicesGrid() {
                 />
 
                 <div className="relative z-10 flex h-full flex-col">
-                  <div className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ${teal ? 'bg-secondary-light' : 'bg-accent-light'}`}>
+                  <div className={`mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl ${teal ? 'bg-secondary-light' : 'bg-accent-light'}`}>
                     <p.icon className={`h-6 w-6 ${teal ? 'text-secondary' : 'text-accent'}`} />
                   </div>
 
-                  <h3 className="mb-2 text-xl font-bold text-text-primary">{p.title}</h3>
-                  <p className="text-sm leading-relaxed mb-5 text-text-secondary">{p.description}</p>
+                  <h3 className="mb-1.5 text-xl font-bold text-text-primary">{p.title}</h3>
+                  <p className="text-sm leading-relaxed mb-4 text-text-secondary">{p.description}</p>
 
                   <span className={`mt-auto inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5 ${teal ? 'text-secondary' : 'text-accent'}`}>
                     Explore

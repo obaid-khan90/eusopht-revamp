@@ -97,16 +97,16 @@ const float = (range: number, dur: number) => ({
 });
 
 const INDUSTRIES = [
-  { icon: CurrencyDollarIcon, name: 'Fintech', color: '#16a34a', point: 'left' as const, rotate: 145, pos: 'right-0 top-[12%]' },
-  { icon: HeartIcon, name: 'Healthcare', color: '#dc2626', point: 'left' as const, rotate: 125, pos: 'right-2 top-[38%]' },
-  { icon: ShoppingBagIcon, name: 'eCommerce', color: '#9333ea', point: 'right' as const, rotate: 140, pos: 'left-[-8%] top-[15%]' },
-  { icon: AcademicCapIcon, name: 'EdTech', color: '#ea580c', point: 'right' as const, rotate: 110, pos: 'left-[-5%] top-[50%]' },
+  { icon: CurrencyDollarIcon, name: 'Fintech',    color: '#16a34a', point: 'left'  as const, rotate: 145, pos: 'right-6 top-[10%]' },
+  { icon: HeartIcon,          name: 'Healthcare', color: '#dc2626', point: 'left'  as const, rotate: 125, pos: 'right-10 top-[40%]' },
+  { icon: ShoppingBagIcon,    name: 'eCommerce',  color: '#9333ea', point: 'right' as const, rotate: 140, pos: 'left-6 top-[12%]' },
+  { icon: AcademicCapIcon,    name: 'EdTech',     color: '#ea580c', point: 'right' as const, rotate: 110, pos: 'left-8 top-[52%]' },
 ];
 
 export default function FloatingCursors() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
-      <div className="relative mx-auto h-full max-w-5xl">
+      <div className="relative mx-auto h-full max-w-6xl px-6">
         {INDUSTRIES.map((ind, i) => (
           <motion.div key={ind.name} className={`absolute ${ind.pos}`} {...float(7 + i, 5.5 + i * 0.5)}>
             <IndustryCursor
@@ -120,7 +120,7 @@ export default function FloatingCursors() {
         ))}
 
         {/* AI Agent */}
-        <motion.div className="absolute left-4 top-[33%]" {...float(10, 7)}>
+        <motion.div className="absolute left-10 top-[34%]" {...float(10, 7)}>
           <AICursor rotate={120} />
         </motion.div>
       </div>

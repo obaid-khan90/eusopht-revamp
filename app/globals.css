@@ -120,6 +120,15 @@ label {
   animation: marquee-right 32s linear infinite;
 }
 
+@media (max-width: 768px) {
+  .marquee-left {
+    animation-duration: 16s;
+  }
+  .marquee-right {
+    animation-duration: 16s;
+  }
+}
+
 .marquee-left:hover,
 .marquee-right:hover {
   animation-play-state: paused;

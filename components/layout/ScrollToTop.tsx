@@ -6,6 +6,7 @@ import { ArrowUpIcon } from '@heroicons/react/24/outline';
 
 export default function ScrollToTop() {
   const [visible, setVisible] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > window.innerHeight);
@@ -13,9 +14,15 @@ export default function ScrollToTop() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    const handler = (e: Event) => setNavOpen((e as CustomEvent<{ open: boolean }>).detail.open);
+    window.addEventListener('mobileNavToggle', handler);
+    return () => window.removeEventListener('mobileNavToggle', handler);
+  }, []);
+
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && !navOpen && (
         <motion.button
           initial={{ opacity: 0, scale: 0.8, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
