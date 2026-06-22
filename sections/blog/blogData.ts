@@ -35,7 +35,12 @@ export const categories: Array<'All' | BlogCategory> = [
   'Web Development',
 ];
 
-export const posts: BlogPost[] = [
+/**
+ * Seed data — the original hardcoded posts. This is no longer read by the
+ * site at runtime; it's the source for `db/seed.ts`, which loads these rows
+ * into Postgres. The site reads posts via `db/blog.ts` instead.
+ */
+export const seedPosts: BlogPost[] = [
   {
     slug: 'computer-vision-ai-services',
     title: 'Computer Vision AI Services: Where Visual Data Becomes Decisions',
@@ -319,10 +324,6 @@ export const posts: BlogPost[] = [
     ],
   },
 ];
-
-export function getPost(slug: string) {
-  return posts.find((p) => p.slug === slug);
-}
 
 export function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-US', {

@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
 import BlogHero from '@/sections/blog/BlogHero';
 import BlogGrid from '@/sections/blog/BlogGrid';
-import { posts } from '@/sections/blog/blogData';
+import { getAllPosts } from '@/db/blog';
+
+// ISR: serve a cached page, regenerate in the background at most once every
+// 60s so new/edited posts appear without a rebuild.
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Blog — Insights on AI, Automation & Software',
@@ -16,7 +20,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const posts = await getAllPosts();
   return (
     <>
       <BlogHero />

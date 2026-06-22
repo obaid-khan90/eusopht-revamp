@@ -1,11 +1,12 @@
 import type { MetadataRoute } from 'next';
 import { projects } from '@/sections/portfolio/portfolioData';
-import { posts } from '@/sections/blog/blogData';
+import { getAllPosts } from '@/db/blog';
 
 const SITE_URL = 'https://eusopht.com';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const posts = await getAllPosts();
   const routes = [
     '',
     '/services/ai',

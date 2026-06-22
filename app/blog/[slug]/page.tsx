@@ -3,15 +3,22 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeftIcon, ArrowRightIcon, EyeIcon, ClockIcon } from '@heroicons/react/24/outline';
-import { posts, getPost, formatDate } from '@/sections/blog/blogData';
+import { formatDate } from '@/sections/blog/blogData';
+import { getPostBySlug, getRelatedPosts, getAllPostSlugs } from '@/db/blog';
 
-export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
+// ISR: posts known at build time are prerendered; edits show up within 60s,
+// and new slugs not in generateStaticParams are generated on-demand
+// (dynamicParams defaults to true).
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const slugs = await getAllPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata(props: PageProps<'/blog/[slug]'>): Promise<Metadata> {
   const { slug } = await props.params;
-  const post = getPost(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return { title: 'Post Not Found' };
   return {
     title: post.title,
@@ -29,12 +36,10 @@ export async function generateMetadata(props: PageProps<'/blog/[slug]'>): Promis
 
 export default async function BlogPostPage(props: PageProps<'/blog/[slug]'>) {
   const { slug } = await props.params;
-  const post = getPost(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const related = posts.filter((p) => p.slug !== post.slug && p.category === post.category).slice(0, 3);
-  const fallbackRelated = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
-  const recommended = related.length ? related : fallbackRelated;
+  const recommended = await getRelatedPosts(post.slug, post.category, 3);
 
   return (
     <>
