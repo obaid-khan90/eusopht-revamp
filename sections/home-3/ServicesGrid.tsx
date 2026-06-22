@@ -3,6 +3,7 @@ import SectionHeader from '@/components/ui/SectionHeader';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import Link from 'next/link';
+import { CardCarousel } from '@/components/card-carousel';
 
 const pillars = [
   {
@@ -44,10 +45,50 @@ export default function ServicesGrid() {
             overline="What We Do"
             headline="Four Pillars. One Partner."
             subtitle="AI is at the core of everything we build — backed by automation, dedicated engineering teams, and full-stack custom software."
+            centered={true}
           />
         </AnimatedSection>
 
-        <div className="mt-14 grid grid-cols-1 items-start gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Mobile: card carousel */}
+        <div className="mt-14 lg:hidden">
+          <CardCarousel
+            items={pillars.map((p) => (
+              <Link
+                key={p.title}
+                href={p.href}
+                className="group relative flex h-[440px] w-full flex-col overflow-hidden rounded-3xl border border-accent/30 bg-white py-8 px-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg hover:shadow-black/8"
+              >
+                {/* Back layer — 3D icon bleeding from bottom-right */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -bottom-10 -right-10 z-0 h-52 w-52 mix-blend-multiply opacity-40 transition-all duration-300 group-hover:scale-105 group-hover:opacity-60"
+                >
+                  <Image
+                    src={p.icon}
+                    alt=""
+                    fill
+                    sizes="208px"
+                    className="object-contain brightness-110 saturate-[0.85]"
+                  />
+                </div>
+
+                {/* Top layer — content */}
+                <div className="relative z-10 flex h-full flex-col">
+                  <h3 className="mb-2 text-lg font-bold text-text-primary">{p.title}</h3>
+                  <p className="text-sm leading-relaxed text-text-secondary">{p.description}</p>
+
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-accent transition-all group-hover:gap-2.5">
+                    Explore
+                    <ArrowRightIcon className="h-4 w-4" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          />
+        </div>
+
+        {/* Desktop: Grid */}
+        <div className="mt-14 hidden grid-cols-4 items-start gap-3 lg:grid">
           {pillars.map((p, i) => (
             <AnimatedSection
               key={p.title}

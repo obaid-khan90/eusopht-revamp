@@ -9,11 +9,24 @@ import { categories, formatDate, type BlogCategory, type BlogPost } from './blog
 
 export default function BlogGrid({ posts }: { posts: BlogPost[] }) {
   const [active, setActive] = useState<'All' | BlogCategory>('All');
+  const [visibleCount, setVisibleCount] = useState(6);
+
   // only show categories that actually have posts
   const available = categories.filter(
     (c) => c === 'All' || posts.some((p) => p.category === c)
   );
   const list = active === 'All' ? posts : posts.filter((p) => p.category === active);
+  const visibleList = list.slice(0, visibleCount);
+  const hasMore = visibleCount < list.length;
+
+  const handleCategoryChange = (c: 'All' | BlogCategory) => {
+    setActive(c);
+    setVisibleCount(6);
+  };
+
+  const handleShowMore = () => {
+    setVisibleCount((prev) => prev + 6);
+  };
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-16">
@@ -22,7 +35,7 @@ export default function BlogGrid({ posts }: { posts: BlogPost[] }) {
         {available.map((c) => (
           <button
             key={c}
-            onClick={() => setActive(c)}
+            onClick={() => handleCategoryChange(c)}
             className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
               active === c
                 ? 'bg-accent text-white shadow-sm'
@@ -37,7 +50,7 @@ export default function BlogGrid({ posts }: { posts: BlogPost[] }) {
       {/* Grid */}
       <motion.div layout className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
-          {list.map((post) => (
+          {visibleList.map((post) => (
             <motion.div
               key={post.slug}
               layout
@@ -88,6 +101,18 @@ export default function BlogGrid({ posts }: { posts: BlogPost[] }) {
           ))}
         </AnimatePresence>
       </motion.div>
+
+      {/* Show More */}
+      {hasMore && (
+        <div className="mt-12 flex justify-center">
+          <button
+            onClick={handleShowMore}
+            className="rounded-full bg-accent px-8 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent/90 hover:shadow-lg"
+          >
+            Show More
+          </button>
+        </div>
+      )}
     </div>
   );
 }

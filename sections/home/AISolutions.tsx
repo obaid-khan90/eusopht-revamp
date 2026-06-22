@@ -68,9 +68,8 @@ export default function AISolutions() {
               <div className="grid grid-cols-1 items-center gap-8 rounded-3xl border border-border bg-white p-6 shadow-sm lg:grid-cols-2 lg:gap-12 lg:p-10">
                 {/* Mock visual */}
                 <div
-                  className={`relative min-h-[260px] overflow-hidden rounded-2xl border border-border bg-bg ${
-                    row.reverse ? 'lg:order-2' : 'lg:order-1'
-                  }`}
+                  className={`relative min-h-[260px] overflow-hidden rounded-2xl border border-border bg-bg ${row.reverse ? 'lg:order-2' : 'lg:order-1'
+                    }`}
                 >
                   <row.Mock />
                 </div>

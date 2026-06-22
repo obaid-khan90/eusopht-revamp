@@ -8,6 +8,7 @@ import {
   ArrowRightIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { CardCarousel } from '@/components/card-carousel';
 
 const pillars = [
   {
@@ -56,19 +57,16 @@ export default function ServicesGrid() {
           />
         </AnimatedSection>
 
-        {/* Mobile: scroll-stacking cards (single narrower column) */}
+        {/* Mobile: card carousel (single narrower column) */}
         <div className="mt-14 lg:hidden">
-          {pillars.map((p, i) => {
-            const teal = i % 2 === 1;
-            return (
-              <div
-                key={p.title}
-                className="sticky top-28 pb-6"
-                style={{ zIndex: i + 1 }}
-              >
+          <CardCarousel
+            items={pillars.map((p, i) => {
+              const teal = i % 2 === 1;
+              return (
                 <Link
+                  key={p.title}
                   href={p.href}
-                  className="group relative mx-auto flex max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-md transition-all duration-300 hover:border-accent/30"
+                  className="group relative mx-auto flex h-[380px] w-full flex-col overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-md transition-all duration-300 hover:border-accent/30"
                 >
                   {/* Grid pattern bg */}
                   <div
@@ -84,7 +82,7 @@ export default function ServicesGrid() {
                     }}
                   />
 
-                  <div className="relative z-10 flex flex-col">
+                  <div className="relative z-10 flex h-full flex-col">
                     <div className={`mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl ${teal ? 'bg-secondary-light' : 'bg-accent-light'}`}>
                       <p.icon className={`h-6 w-6 ${teal ? 'text-secondary' : 'text-accent'}`} />
                     </div>
@@ -98,9 +96,9 @@ export default function ServicesGrid() {
                     </span>
                   </div>
                 </Link>
-              </div>
-            );
-          })}
+              );
+            })}
+          />
         </div>
 
         {/* Desktop: original 4-column grid */}

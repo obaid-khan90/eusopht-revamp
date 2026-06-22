@@ -1,6 +1,6 @@
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import SectionHeader from '@/components/ui/SectionHeader';
-import Badge from '@/components/ui/Badge';
+import { Badge } from "@/components/ui/Badge";
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';

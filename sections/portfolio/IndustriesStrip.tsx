@@ -35,7 +35,7 @@ export default function IndustriesStrip() {
           />
         </AnimatedSection>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="flex flex-col gap-4">
           {industries.map((ind, i) => (
             <AnimatedSection key={ind.label} delay={(i % 4) * 0.06}>
               <div className="group flex items-center gap-3 rounded-2xl border border-border bg-bg p-5 transition-all duration-300 hover:border-accent/30 hover:bg-accent-light">

@@ -1,11 +1,14 @@
 import type { Metadata } from 'next';
-import { Lato, Manrope } from 'next/font/google';
+import { Lato, Manrope, Geist } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import StructuredData from '@/components/seo/StructuredData';
 import ScrollToTop from '@/components/layout/ScrollToTop';
 import ContactLauncher from '@/components/layout/ContactLauncher';
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const lato = Lato({
   subsets: ['latin'],
@@ -65,7 +68,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${lato.variable} ${manrope.variable} h-full`}
+      className={cn("h-full", lato.variable, manrope.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col">
         <StructuredData />

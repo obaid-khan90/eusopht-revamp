@@ -3,7 +3,7 @@
 import { motion, type Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import Badge from '@/components/ui/Badge';
+import { Badge } from "@/components/ui/Badge";
 import AnimatedCounter from '@/components/ui/AnimatedCounter';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 

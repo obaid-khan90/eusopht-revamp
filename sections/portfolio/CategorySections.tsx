@@ -22,6 +22,7 @@ const CARD_IMAGE: Record<string, string> = {
 
 export default function CategorySections({ items = allProjects }: { items?: Project[] }) {
   const [active, setActive] = useState<SolutionKey>(SOLUTION_GROUPS[0].key);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   // Activate the tab matching the URL hash (e.g. /portfolio#automation) and scroll to it
   useEffect(() => {
@@ -38,6 +39,17 @@ export default function CategorySections({ items = allProjects }: { items?: Proj
   const group = SOLUTION_GROUPS.find((g) => g.key === active) ?? SOLUTION_GROUPS[0];
   const countFor = (key: SolutionKey) => items.filter((p) => solutionOf(p.slug) === key).length;
   const groupProjects = items.filter((p) => solutionOf(p.slug) === group.key);
+  const visibleProjects = groupProjects.slice(0, visibleCount);
+  const hasMore = visibleCount < groupProjects.length;
+
+  const handleTabChange = (key: SolutionKey) => {
+    setActive(key);
+    setVisibleCount(6);
+  };
+
+  const handleShowMore = () => {
+    setVisibleCount(prev => prev + 6);
+  };
 
   return (
     <section id="our-work" className="scroll-mt-28">
@@ -56,7 +68,7 @@ export default function CategorySections({ items = allProjects }: { items?: Proj
           {SOLUTION_GROUPS.map((g) => (
             <button
               key={g.key}
-              onClick={() => setActive(g.key)}
+              onClick={() => handleTabChange(g.key)}
               className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all ${
                 active === g.key
                   ? 'bg-accent text-white shadow-sm'
@@ -85,7 +97,7 @@ export default function CategorySections({ items = allProjects }: { items?: Proj
               transition={{ duration: 0.3 }}
               className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
             >
-              {groupProjects.map((p) => (
+              {visibleProjects.map((p) => (
                 <div key={p.slug} className="h-[420px]">
                   <ProjectCard
                     href={`/project/${p.slug}`}
@@ -101,6 +113,18 @@ export default function CategorySections({ items = allProjects }: { items?: Proj
             </motion.div>
           </AnimatePresence>
         </div>
+
+        {/* Show More */}
+        {hasMore && (
+          <div className="mt-12 flex justify-center">
+            <button
+              onClick={handleShowMore}
+              className="rounded-full bg-accent px-8 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent/90 hover:shadow-lg"
+            >
+              Show More
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
