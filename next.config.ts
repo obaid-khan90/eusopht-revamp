@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "randomuser.me" },
       { protocol: "https", hostname: "avatar.iran.liara.run" },
       { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "aoiogtphutzkdpbxpssx.supabase.co" },
     ],
   },
 

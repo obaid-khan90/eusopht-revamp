@@ -13,7 +13,7 @@ function toBlogPost(row: PostRow): BlogPost {
     excerpt: row.excerpt,
     date: row.date,
     readTime: row.readTime,
-    views: row.views,
+    author: row.author,
     tags: row.tags,
     image: row.image,
     body: row.body,

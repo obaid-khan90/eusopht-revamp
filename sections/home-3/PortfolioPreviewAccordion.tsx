@@ -6,7 +6,7 @@ import { ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/re
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import SectionHeader from '@/components/ui/SectionHeader';
 import ProjectCard from '@/components/ui/ProjectCard';
-import { workGroups, type WorkGroup } from '@/sections/home/workData';
+import { workGroups, type WorkGroup } from '@/sections/portfolio/portfolioData';
 
 function CategoryRow({ group }: { group: WorkGroup }) {
   const scroller = useRef<HTMLDivElement>(null);

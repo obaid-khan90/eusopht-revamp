@@ -6,7 +6,7 @@ import Link from 'next/link';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import SectionHeader from '@/components/ui/SectionHeader';
 import ProjectCard from '@/components/ui/ProjectCard';
-import { workGroups } from './workData';
+import { workGroups } from '@/sections/portfolio/portfolioData';
 
 export default function PortfolioPreviewTabs() {
   const [active, setActive] = useState(workGroups[0].key);

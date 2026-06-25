@@ -9,31 +9,33 @@ import {
   projects as allProjects,
   SOLUTION_GROUPS,
   solutionOf,
+  CARD_IMAGE,
   type Project,
   type SolutionKey,
 } from './portfolioData';
-
-// Grid-card-only image overrides (detail pages keep their own image).
-const CARD_IMAGE: Record<string, string> = {
-  cricketmood: '/7.png',
-  midwifex: '/Midwife.png',
-  'mensa-pay': '/mensa.png',
-};
 
 export default function CategorySections({ items = allProjects }: { items?: Project[] }) {
   const [active, setActive] = useState<SolutionKey>(SOLUTION_GROUPS[0].key);
   const [visibleCount, setVisibleCount] = useState(6);
 
-  // Activate the tab matching the URL hash (e.g. /portfolio#automation) and scroll to it
+  // Activate a tab on mount. A URL hash (e.g. /portfolio#automation) takes
+  // priority for deep links; otherwise restore the tab the user was last on
+  // before opening a project, so Back returns them to the same tab.
   useEffect(() => {
     const hash = window.location.hash.replace('#', '') as SolutionKey;
-    if (SOLUTION_GROUPS.some((g) => g.key === hash)) {
+    const isValid = (k: string): k is SolutionKey => SOLUTION_GROUPS.some((g) => g.key === k);
+
+    if (isValid(hash)) {
       setActive(hash);
       // wait a frame so the section is laid out, then scroll into view
       requestAnimationFrame(() => {
         document.getElementById('our-work')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
+      return;
     }
+
+    const stored = sessionStorage.getItem('portfolio-tab') ?? '';
+    if (isValid(stored)) setActive(stored);
   }, []);
 
   const group = SOLUTION_GROUPS.find((g) => g.key === active) ?? SOLUTION_GROUPS[0];
@@ -49,6 +51,14 @@ export default function CategorySections({ items = allProjects }: { items?: Proj
 
   const handleShowMore = () => {
     setVisibleCount(prev => prev + 6);
+  };
+
+  // Remember the active tab before navigating to a project, so returning to
+  // the portfolio (Back button or breadcrumb) re-activates the same tab. We use
+  // sessionStorage instead of mutating the URL, which would race with the
+  // router's own navigation and break the click-through to the project page.
+  const rememberTab = () => {
+    sessionStorage.setItem('portfolio-tab', active);
   };
 
   return (
@@ -98,7 +108,7 @@ export default function CategorySections({ items = allProjects }: { items?: Proj
               className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
             >
               {visibleProjects.map((p) => (
-                <div key={p.slug} className="h-[420px]">
+                <div key={p.slug} className="h-[420px]" onClick={rememberTab}>
                   <ProjectCard
                     href={`/project/${p.slug}`}
                     image={CARD_IMAGE[p.slug] ?? p.image}

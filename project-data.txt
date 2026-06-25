@@ -1,0 +1,385 @@
+Eusopht — Project Portfolio Data
+
+Each project follows a consistent format: Problem, Solution, Technologies Used, and Business Impact (with measurable outcomes).
+
+Note: The percentages and counts in the Business Impact sections are representative figures written in the requested measurable format. Replace any figure with verified client metrics before publishing externally.
+
+
+AI Solutions
+
+
+1. Social Media Blast (AiBuddy)
+Industry: Social Media  •  Web Application
+
+Problem: Marketing teams spent hours each day manually writing, formatting, and scheduling posts across multiple social platforms, leading to inconsistent branding and slow publishing cycles.
+
+Solution: An AI-powered social media management platform that drafts on-brand content, schedules and publishes across multiple channels from a single dashboard, and surfaces engagement analytics — all from one unified content calendar.
+
+Technologies Used: React, TypeScript, OpenAI, Node.js
+
+Business Impact:
+ - Reduced manual content production time by 70%
+ - Automated publishing across 5+ social platforms from one dashboard
+ - Integrated AI content generation with multi-platform scheduling APIs
+ - Improved posting consistency and on-brand output across all channels
+
+
+2. Vizii
+Industry: FinTech  •  Web Application
+
+Problem: Business owners and accountants relied on manual spreadsheet reporting to make sense of cloud accounting data, costing hours of effort and delaying decisions.
+
+Solution: A web-based analytics platform that connects to cloud accounting software and turns raw financial data into live, visual dashboards covering revenue, expenses, and cash flow, with customisable KPIs and export-ready reports.
+
+Technologies Used: React, Node.js, PostgreSQL, Chart.js
+
+Business Impact:
+ - Reduced manual spreadsheet reporting by 90%
+ - Automated financial dashboard and report generation
+ - Integrated with cloud accounting platforms for live data sync
+ - Improved time-to-insight from days to near real-time
+
+
+3. evalu
+Industry: EdTech  •  Web Application
+
+Problem: Organisations ran evaluations through fragmented, manual workflows, making assessments slow, inconsistent, and hard to analyse.
+
+Solution: A platform that brings assessments, automated scoring, feedback, and reporting into one streamlined digital workflow with configurable templates and role-based access.
+
+Technologies Used: React, Node.js, PostgreSQL
+
+Business Impact:
+ - Reduced manual scoring and feedback effort by 65%
+ - Automated evaluation scoring and report generation
+ - Integrated configurable templates with exportable analytics
+ - Improved assessment consistency and turnaround time
+
+
+4. GuideWire AID
+Industry: HealthTech  •  Mobile Application
+
+Problem: Users needed reliable, structured guidance on the go but lacked a single, accessible mobile resource that worked across both iOS and Android.
+
+Solution: A comprehensive cross-platform mobile app delivering structured guidance and resources through intuitive navigation, smart search, push notifications, and offline-friendly content.
+
+Technologies Used: Flutter, Firebase
+
+Business Impact:
+ - Reduced time to find relevant guidance through smart navigation and search
+ - Automated content delivery and push notifications to users
+ - Integrated a single codebase serving 2 platforms (iOS + Android)
+ - Improved accessibility with offline-capable content delivery
+
+
+5. Learning Cert
+Industry: EdTech  •  Web Application
+
+Problem: Corporate training providers managed course creation, enrollment, progress tracking, and certificate issuance across disconnected manual processes.
+
+Solution: A custom certification and training platform that runs programs end-to-end — course management, learner enrollment, progress tracking, automated certificate generation, and provider analytics — in one branded experience.
+
+Technologies Used: Nuxt, Laravel, MySQL
+
+Business Impact:
+ - Reduced certificate issuance and admin effort by 80% through automation
+ - Automated certificate generation and learner progress tracking
+ - Integrated enrollment, content management, and reporting in one platform
+ - Improved learner engagement and administrative efficiency
+
+
+Automation & Integrations
+
+
+6. Postmerica
+Industry: eCommerce  •  Web Application
+
+Problem: eCommerce store owners manually created shipping labels and managed orders one by one, slowing fulfillment and inflating shipping costs.
+
+Solution: A fulfillment web app that centralises order management, automates bulk label creation across carriers, compares multi-carrier rates, and tracks orders end to end.
+
+Technologies Used: React, Node.js, Stripe, ShipStation API
+
+Business Impact:
+ - Reduced manual label creation by 85% with bulk generation
+ - Automated multi-carrier label generation and order fulfillment
+ - Integrated multiple carrier and payment systems (ShipStation, Stripe)
+ - Improved shipping cost savings through automated rate comparison
+
+
+7. Nullship
+Industry: Logistics  •  Web Application
+
+Problem: Retailers struggled to ship on time and control costs while juggling orders and carrier rates manually.
+
+Solution: A web app that centralises order management, automates label generation, and surfaces the best discounted rates across multiple carriers with shipment tracking.
+
+Technologies Used: Next.js, Node.js, Stripe, Carrier APIs
+
+Business Impact:
+ - Reduced manual order and label handling by 80%
+ - Automated label generation and best-rate selection
+ - Integrated multiple carrier APIs for real-time rate comparison
+ - Improved delivery reliability and reduced shipping costs
+
+
+8. OrganAise
+Industry: Productivity  •  Web + Mobile
+
+Problem: Coordinating events and tasks across calendars was friction-heavy and time-consuming, leaving users disorganised and stressed.
+
+Solution: An AI-powered scheduling app that automates event planning with smart suggestions, task and reminder management, and calendar integration across web, iOS, and Android.
+
+Technologies Used: Flutter, OpenAI, Firebase
+
+Business Impact:
+ - Reduced event-planning effort with AI-driven scheduling suggestions
+ - Automated reminders, task management, and scheduling
+ - Integrated calendar systems with a single codebase across 3 platforms
+ - Improved planning speed and reduced scheduling friction
+
+
+9. Autosmart Australia
+Industry: eCommerce  •  Web Application
+
+Problem: Australia's largest supplier of vehicle cleaning products needed a scalable online storefront to handle trade and retail ordering without manual order processing.
+
+Solution: An eCommerce platform with a comprehensive product catalogue, trade and retail ordering, secure checkout, customer accounts with reordering, and an admin back-office.
+
+Technologies Used: Laravel, Vue.js, MySQL
+
+Business Impact:
+ - Reduced manual order processing with self-service ordering and reordering
+ - Automated checkout, inventory, and order management
+ - Integrated catalogue, payments, and back-office in one platform
+ - Improved sales scalability for trade and retail customers
+
+
+10. Autosmart Axis
+Industry: Automotive  •  Mobile Application (iPad)
+
+Problem: Field and in-store teams managed daily operations on paper, causing data-entry errors and slow, inconsistent workflows.
+
+Solution: An iPad-based workflow management system that digitises processes, captures data on the go, assigns and tracks tasks, and syncs with back-office systems — with offline capability.
+
+Technologies Used: Swift, iPadOS, REST APIs
+
+Business Impact:
+ - Reduced manual paperwork and data-entry errors
+ - Automated field and in-store operational workflows
+ - Integrated on-device capture with back-office systems via REST APIs
+ - Improved data accuracy with offline-capable operation and sync
+
+
+11. Canezo
+Industry: Business Ops  •  Web Application
+
+Problem: A natural confectionery brand had no online sales channel and managed catalogue and orders manually, limiting reach and conversion.
+
+Solution: A polished eCommerce storefront with rich product pages, secure checkout, order and inventory management, and promotion/discount tooling.
+
+Technologies Used: Next.js, Tailwind CSS, Stripe
+
+Business Impact:
+ - Reduced manual catalogue and order handling through an admin dashboard
+ - Automated checkout, payments, and promotions
+ - Integrated storefront, payments, and inventory management
+ - Improved online conversion with a premium shopping experience
+
+
+Web & Mobile Apps
+
+
+12. AutoFlow
+Industry: Automotive  •  Web Application
+
+Problem: Car dealerships ran inventory, sales, and customer engagement through manual, disconnected processes, slowing sales and weakening lead management.
+
+Solution: A unified web and mobile platform that digitises inventory, automates sales processes, and enhances engagement with real-time listings, test-drive bookings, digital document uploads, smart lead management, and analytics.
+
+Technologies Used: Laravel, Vue.js, MySQL, Tailwind CSS
+
+Business Impact:
+ - Reduced manual dealership admin work through digitised workflows
+ - Automated lead capture, test-drive bookings, and document handling
+ - Integrated role-based dashboards for Admins, Dealers, and Customers
+ - Improved response time with in-app messaging and real-time notifications
+
+
+13. CricketMood
+Industry: Sports  •  Mobile Application
+
+Problem: Cricket fans lacked a fast, reliable companion for instant, ball-by-ball match updates and personalised follow notifications.
+
+Solution: A real-time cricket app delivering live ball-by-ball scores, commentary, fixtures, player and team stats, and personalised push notifications.
+
+Technologies Used: Flutter, Firebase, REST APIs
+
+Business Impact:
+ - Improved update speed with real-time, ball-by-ball score delivery
+ - Automated push notifications for wickets, milestones, and results
+ - Integrated live match-data feeds via REST APIs
+ - Increased fan engagement with personalised, instant updates
+
+
+14. MidwifeX®
+Industry: HealthTech  •  Mobile Application
+
+Problem: Expectant parents and healthcare professionals lacked a single, trusted companion for pregnancy guidance, tracking, and professional consultations.
+
+Solution: A comprehensive pregnancy and midwifery companion with daily personalised updates, AI-powered chat, online consultation booking with certified midwives, subscriptions, and a centralised tracking dashboard.
+
+Technologies Used: Flutter, FastAPI, PostgreSQL, Firebase, DigitalOcean
+
+Business Impact:
+ - Reduced manual support load with AI-assisted guidance for routine questions
+ - Automated daily insights, reminders, and subscription billing
+ - Integrated payments (Google Pay/Apple Pay), Zoom consultations, and Firebase
+ - Improved response time to user questions via AI-powered instant chat
+
+
+15. Meu Exótico
+Industry: eCommerce  •  Mobile Application
+
+Problem: Exotic-pet owners had no organised way to track development, events, documents, and health reports, leading to missed care milestones.
+
+Solution: A pet management companion that centralises pet profiles, development tracking, event scheduling, document storage, and care reminders for multiple pets.
+
+Technologies Used: Flutter, Firebase
+
+Business Impact:
+ - Reduced missed care milestones with automated reminders
+ - Automated event scheduling and notification delivery
+ - Integrated records, documents, and reports in one centralised profile
+ - Improved care organisation with multi-pet management
+
+
+16. U&I Wallet
+Industry: FinTech  •  Mobile Application
+
+Problem: Members and employees couldn't easily discover or redeem exclusive offers, loyalty cards, and discount codes scattered across channels.
+
+Solution: A digital loyalty and discounts wallet that stores offers, loyalty cards, and codes in one secure place, with personalised recommendations and in-store and online redemption.
+
+Technologies Used: Flutter, Node.js, MongoDB
+
+Business Impact:
+ - Reduced friction in discovering and redeeming offers
+ - Automated personalised deal recommendations
+ - Integrated in-store and online redemption in one wallet
+ - Improved member engagement and redemption rates
+
+
+17. Vital Group
+Industry: Security  •  Web Application
+
+Problem: A leading electronic security company lacked a modern, trust-building web presence to showcase services and capture leads effectively.
+
+Solution: A modern, conversion-focused website with service showcases, lead-capture and contact flows, a fast responsive experience, and SEO-optimised content.
+
+Technologies Used: Next.js, Tailwind CSS
+
+Business Impact:
+ - Reduced bounce with a fast, responsive, trust-focused site
+ - Automated lead capture through optimised contact flows
+ - Integrated SEO-optimised content to grow organic reach
+ - Improved lead generation and online brand credibility
+
+
+18. Slym Yoga Trial
+Industry: Wellness  •  Mobile Application
+
+Problem: New and experienced practitioners lacked an accessible way to start and maintain a consistent yoga practice with guided content.
+
+Solution: A mobile app offering free yoga trials, guided sessions, curated routines, progress tracking, reminders, streaks, and beginner-friendly onboarding.
+
+Technologies Used: Flutter, Firebase
+
+Business Impact:
+ - Reduced drop-off with beginner-friendly onboarding and streaks
+ - Automated reminders and progress tracking
+ - Integrated guided sessions across iOS and Android from one codebase
+ - Improved practice consistency through accessible guided content
+
+
+19. WeBees
+Industry: Social  •  Mobile Application
+
+Problem: People had no single place to connect locally, ask questions, and discover nearby people, places, and events.
+
+Solution: A community app blending social discovery with local knowledge — local recommendations, community Q&A, an events feed, user profiles, connections, and push notifications.
+
+Technologies Used: Flutter, Node.js, MongoDB
+
+Business Impact:
+ - Reduced effort to find local recommendations and events
+ - Automated notifications for nearby activity and answers
+ - Integrated discovery, Q&A, and events in one feed
+ - Improved local community engagement and connection
+
+
+20. Mensa Pay
+Industry: FinTech  •  Mobile Application
+
+Problem: Users needed a fast, secure way to make payments, transfer funds, and manage balances across currencies with proper compliance.
+
+Solution: A digital wallet app enabling secure payments, peer-to-peer transfers, KYC identity verification, multi-currency support, and transaction insights.
+
+Technologies Used: Flutter, Node.js, PostgreSQL
+
+Business Impact:
+ - Reduced manual identity checks with automated KYC verification
+ - Automated peer-to-peer transfers and balance management
+ - Integrated multi-currency support and compliance workflows
+ - Improved transaction speed and security for end users
+
+
+21. Job Application Portal
+Industry: HR Tech  •  Web Application
+
+Problem: Job seekers abandoned lengthy, confusing application and CV-building processes, lowering completion rates for employers.
+
+Solution: A React-based MVP with a guided, step-by-step CV builder, template-based CV generation, an application submission workflow, and progress saving.
+
+Technologies Used: React, TypeScript, Node.js
+
+Business Impact:
+ - Reduced application friction with a guided, low-friction flow
+ - Automated CV generation from templates
+ - Integrated CV building and submission in one workflow
+ - Improved application completion rates
+
+
+22. ExhibitPro
+Industry: Events  •  Web Application
+
+Problem: Galleries struggled to sell artwork during physical exhibitions and had no real-time visibility into on-site sales.
+
+Solution: A digital solution that lets visitors browse, reserve, and buy artwork on the spot via QR-based lookup, while giving organisers a real-time sales dashboard and secure payments.
+
+Technologies Used: Next.js, Stripe, Tailwind CSS
+
+Business Impact:
+ - Reduced manual sales handling with on-the-spot digital purchasing
+ - Automated reservations, QR lookup, and payment processing
+ - Integrated secure payments with a real-time organiser dashboard
+ - Improved on-site sales and live sales visibility for organisers
+
+
+23. Security World
+Industry: Security  •  Web Application
+
+Problem: A leading electronic security retailer needed to extend its physical store online without manual order handling and limited reach.
+
+Solution: An eCommerce platform with a comprehensive product catalogue, online ordering and checkout, product search and filtering, and inventory and order management in an SEO-optimised, responsive design.
+
+Technologies Used: Laravel, Vue.js, MySQL
+
+Business Impact:
+ - Reduced manual order handling with self-service online ordering
+ - Automated checkout, inventory, and order management
+ - Integrated SEO-optimised storefront with the physical store presence
+ - Improved reach and sales beyond the physical location
+
+
+End of project data — 23 projects

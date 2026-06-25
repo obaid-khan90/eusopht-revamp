@@ -7,8 +7,8 @@ import CTABanner from '@/sections/home/CTABanner';
 import ContactForm from '@/sections/home/ContactForm';
 import { projects } from '@/sections/portfolio/portfolioData';
 
-// 3 featured projects for the alternating showcase
-const FEATURED_SLUGS = ['autosmart-australia', 'nullship', 'postmerica'];
+// Featured projects for the alternating showcase
+const FEATURED_SLUGS = ['social-media-blast', 'organaise', 'mensa-pay'];
 
 const featured = FEATURED_SLUGS
   .map((slug) => projects.find((p) => p.slug === slug))

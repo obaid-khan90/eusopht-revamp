@@ -1,10 +1,12 @@
-import { pgTable, text, integer, date } from 'drizzle-orm/pg-core';
+import { pgTable, text, date, jsonb } from 'drizzle-orm/pg-core';
+import type { BodyBlock } from '@/sections/blog/blogData';
 
 /**
  * Blog posts table — mirrors the `BlogPost` type in
  * `sections/blog/blogData.ts`. `category` and `tags` are stored as plain
  * text; the typed unions live in the app layer, not as DB constraints,
- * so adding a new category never requires a migration.
+ * so adding a new category never requires a migration. `body` is a JSONB
+ * array of text/image blocks (see `BodyBlock`).
  */
 export const posts = pgTable('posts', {
   slug: text('slug').primaryKey(),
@@ -14,11 +16,11 @@ export const posts = pgTable('posts', {
   /** ISO date (YYYY-MM-DD) */
   date: date('date').notNull(),
   readTime: text('read_time').notNull(),
-  views: integer('views').notNull().default(0),
+  author: text('author').notNull().default(''),
   tags: text('tags').array().notNull().default([]),
   image: text('image').notNull(),
-  /** Body paragraphs */
-  body: text('body').array().notNull().default([]),
+  /** Ordered text/image blocks */
+  body: jsonb('body').$type<BodyBlock[]>().notNull().default([]),
 });
 
 export type PostRow = typeof posts.$inferSelect;

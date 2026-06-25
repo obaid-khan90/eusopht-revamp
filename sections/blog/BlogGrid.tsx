@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRightIcon, EyeIcon } from '@heroicons/react/24/outline';
+import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import { categories, formatDate, type BlogCategory, type BlogPost } from './blogData';
 
 export default function BlogGrid({ posts }: { posts: BlogPost[] }) {
@@ -75,10 +75,7 @@ export default function BlogGrid({ posts }: { posts: BlogPost[] }) {
                 <div className="flex flex-1 flex-col p-6">
                   <div className="mb-3 flex items-center justify-between text-xs text-text-muted">
                     <span>{formatDate(post.date)}</span>
-                    <span className="inline-flex items-center gap-1">
-                      <EyeIcon className="h-4 w-4" />
-                      {post.views} views
-                    </span>
+                    <span>{post.readTime}</span>
                   </div>
                   <h3 className="font-bold text-text-primary leading-snug line-clamp-2">{post.title}</h3>
                   <div className="mt-3 flex flex-wrap gap-2">

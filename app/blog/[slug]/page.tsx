@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeftIcon, ArrowRightIcon, EyeIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, ArrowRightIcon, ClockIcon } from '@heroicons/react/24/outline';
 import { formatDate } from '@/sections/blog/blogData';
 import { getPostBySlug, getRelatedPosts, getAllPostSlugs } from '@/db/blog';
 
@@ -46,7 +46,7 @@ export default async function BlogPostPage(props: PageProps<'/blog/[slug]'>) {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div aria-hidden className="absolute inset-0" style={{ background: 'linear-gradient(110deg, #d1fae5 0%, #ecfdf5 22%, #f0f9ff 55%, #dbeafe 100%)' }} />
-        <div className="relative mx-auto max-w-3xl px-6 pt-32 pb-12">
+        <div className="relative mx-auto max-w-6xl px-6 pt-32 pb-16">
           <Link
             href="/blog"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-accent transition-colors"
@@ -55,40 +55,77 @@ export default async function BlogPostPage(props: PageProps<'/blog/[slug]'>) {
             Back to Blog
           </Link>
 
-          <div className="mt-8">
-            <span className="rounded-full bg-accent-light px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
-              {post.category}
-            </span>
-          </div>
-          <h1
-            className="mt-5 text-3xl font-extrabold leading-tight tracking-tight text-text-primary sm:text-4xl lg:text-5xl"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            {post.title}
-          </h1>
-          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-text-muted">
-            <span>{formatDate(post.date)}</span>
-            <span className="inline-flex items-center gap-1"><ClockIcon className="h-4 w-4" />{post.readTime}</span>
-            <span className="inline-flex items-center gap-1"><EyeIcon className="h-4 w-4" />{post.views} views</span>
+          <div className="mt-8 grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
+            {/* Text */}
+            <div>
+              <span className="rounded-full bg-accent-light px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
+                {post.category}
+              </span>
+              <h1
+                className="mt-5 text-3xl font-extrabold leading-tight tracking-tight text-text-primary sm:text-4xl lg:text-5xl"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                {post.title}
+              </h1>
+              <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-text-muted">
+                {post.author && <span>By {post.author}</span>}
+                <span>{formatDate(post.date)}</span>
+                <span className="inline-flex items-center gap-1"><ClockIcon className="h-4 w-4" />{post.readTime}</span>
+              </div>
+            </div>
+
+            {/* Cover image */}
+            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border shadow-lg shadow-black/5">
+              <Image src={post.image} alt={post.title} fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" priority />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Cover image */}
-      <div className="mx-auto max-w-4xl px-6 -mt-2">
-        <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-border shadow-sm">
-          <Image src={post.image} alt={post.title} fill sizes="(max-width:1024px) 100vw, 60vw" className="object-cover" priority />
-        </div>
-      </div>
-
       {/* Body */}
       <article className="mx-auto max-w-3xl px-6 py-16">
         <div className="space-y-6">
-          {post.body.map((para, i) => (
-            <p key={i} className="text-lg leading-relaxed text-text-secondary">
-              {para}
-            </p>
-          ))}
+          {post.body.map((block, i) => {
+            switch (block.type) {
+              case 'heading':
+                return (
+                  <h2
+                    key={i}
+                    className="mt-12 mb-2 text-2xl font-bold tracking-tight text-text-primary sm:text-3xl"
+                    style={{ fontFamily: 'var(--font-display)' }}
+                  >
+                    {block.value}
+                  </h2>
+                );
+              case 'code':
+                return (
+                  <pre
+                    key={i}
+                    className="my-8 overflow-x-auto rounded-2xl border border-border bg-[#1e1e2e] p-5 text-sm leading-relaxed text-[#e4e4e7] shadow-sm"
+                  >
+                    <code className="font-mono whitespace-pre">{block.value}</code>
+                  </pre>
+                );
+              case 'image':
+                return (
+                  <Image
+                    key={i}
+                    src={block.value}
+                    alt=""
+                    width={1600}
+                    height={900}
+                    sizes="(max-width:768px) 100vw, 768px"
+                    className="my-8 h-auto w-full rounded-2xl border border-border shadow-sm"
+                  />
+                );
+              default:
+                return (
+                  <p key={i} className="text-lg leading-relaxed text-text-secondary">
+                    {block.value}
+                  </p>
+                );
+            }
+          })}
         </div>
 
         {/* Tags */}

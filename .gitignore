@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw blog export — only an input to db/transform-official.ts, not used at
+# runtime. The cleaned output (db/officialPosts.json) is committed instead.
+blogs_rows.json

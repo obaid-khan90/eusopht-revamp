@@ -332,7 +332,7 @@ export const projects: Project[] = [
     description: 'Exclusive loyalty and employee discounts with the U&I wallet app.',
     longDescription:
       'U&I Wallet is a digital loyalty and discounts app that gives users access to exclusive employee and member benefits. It stores offers, loyalty cards, and discount codes in one secure wallet, making it effortless to discover and redeem savings.',
-    technologies: ['React Native', 'Node.js', 'MongoDB'],
+    technologies: ['Flutter', 'Node.js', 'MongoDB'],
     features: [
       'Digital loyalty and discount wallet',
       'Exclusive member and employee offers',
@@ -343,7 +343,7 @@ export const projects: Project[] = [
     results:
       'Increases member engagement and redemption rates by putting exclusive savings in one convenient place.',
     platforms: ['ios', 'android'],
-    image: '/mensa.png',
+    image: '/ui.png',
   },
   {
     slug: 'nullship',
@@ -429,7 +429,7 @@ export const projects: Project[] = [
     results:
       'Strengthens the brand’s credibility online and improves lead generation through a polished, conversion-focused site.',
     platforms: ['web'],
-    image: '/vital.png',
+    image: '/vital-ss.png',
     platformLinks: { web: 'https://vitalgroup.com.pk' },
   },
   {
@@ -460,7 +460,7 @@ export const projects: Project[] = [
     description: 'Free yoga trials and workout guides.',
     longDescription:
       'SlymYoga is a mobile application offering free yoga trials and workout guides. It delivers guided sessions, progress tracking, and curated routines to help users build a consistent practice, whether they’re beginners or experienced practitioners.',
-    technologies: ['React Native', 'Firebase'],
+    technologies: ['Flutter', 'Firebase'],
     features: [
       'Guided yoga sessions and trials',
       'Curated workout routines',
@@ -491,9 +491,9 @@ export const projects: Project[] = [
     ],
     results:
       'Makes event planning faster and less stressful through AI-driven scheduling and organisation tools.',
-    platforms: ['ios', 'android'],
+    platforms: ['web', 'ios', 'android'],
     image: '/organaise.png',
-    imageDesktop: '/organaise1.png',
+    imageDesktop: '/organaise.png',
     platformLinks: { web: 'https://getorganaise.com' },
   },
   {
@@ -524,7 +524,7 @@ export const projects: Project[] = [
     description: 'Connect, ask, and discover locally.',
     longDescription:
       'WeBees is a community app that helps people connect, ask questions, and discover what’s happening locally. It blends social discovery with local knowledge, making it easy to find recommendations, events, and people nearby.',
-    technologies: ['React Native', 'Node.js', 'MongoDB'],
+    technologies: ['Flutter', 'Node.js', 'MongoDB'],
     features: [
       'Local discovery and recommendations',
       'Community Q&A',
@@ -597,7 +597,7 @@ export const projects: Project[] = [
     results:
       'Boosts on-site artwork sales and gives organisers live visibility into performance during exhibitions.',
     platforms: ['web'],
-    image: '/security-world.png',
+    image: '/exibit.png',
   },
   {
     slug: 'security-world',
@@ -625,3 +625,46 @@ export const projects: Project[] = [
 export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);
 }
+
+/* Grid-card-only image overrides — keep in sync with CategorySections.CARD_IMAGE
+   so the home "Our Work" cards match the portfolio grid cards. */
+export const CARD_IMAGE: Record<string, string> = {
+  cricketmood: '/7.png',
+  midwifex: '/Midwife.png',
+  'mensa-pay': '/mensa.png',
+};
+
+/* Shape consumed by the home "Our Work" section. */
+export interface WorkProject {
+  title: string;
+  category: string;
+  description: string;
+  tags: string[];
+  image: string;
+  href: string;
+}
+
+export interface WorkGroup {
+  key: SolutionKey;
+  label: string;
+  blurb: string;
+  projects: WorkProject[];
+}
+
+/* Derive the grouped "Our Work" view straight from the project catalog so the
+   home page mirrors the portfolio grouping exactly — single source of truth. */
+export const workGroups: WorkGroup[] = SOLUTION_GROUPS.map((g) => ({
+  key: g.key,
+  label: g.label,
+  blurb: g.blurb,
+  projects: projects
+    .filter((p) => solutionOf(p.slug) === g.key)
+    .map((p) => ({
+      title: p.title,
+      category: p.category,
+      description: p.description,
+      tags: p.technologies.slice(0, 3),
+      image: CARD_IMAGE[p.slug] ?? p.image,
+      href: `/project/${p.slug}`,
+    })),
+}));
